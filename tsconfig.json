@@ -18,8 +18,15 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@/app/*": ["src/app/*"],
+      "@/features/*": ["src/features/*"],
+      "@/public/*": ["public/*"],
+      "@/favorites/*": ["src/features/favorites/*"],
+      "@/games/*": ["src/features/games/*"],
+      "@/shared/*": ["src/features/shared/*"],
+      "@/svg/*": ["src/features/svg/*"],
     }
   },
   "include": [
