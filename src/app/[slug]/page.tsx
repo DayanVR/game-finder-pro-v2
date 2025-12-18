@@ -1,4 +1,20 @@
-export default async function GamePage({ params }: { params: { slug: string | undefined } }) {
-  const { slug } = await params;
-  return <div>Game {slug}</div>;
+'use client';
+import { useFetchGamesData } from '@/features/games/hooks/fetchGamesData';
+import { useParams } from 'next/navigation';
+
+export default function GamePage() {
+  const params = useParams();
+  const { gameDetails } = useFetchGamesData(params.slug as string);
+
+  console.log(gameDetails)  
+
+  return (
+    <>
+      <div>
+        {gameDetails && (
+          <p>{gameDetails.name}</p>
+        )}
+      </div>
+    </>
+  );
 }
