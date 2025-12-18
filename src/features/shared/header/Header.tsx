@@ -1,11 +1,11 @@
-import GamerLibrary from './GamerLibrary';
+import GamerLibraryLink from './GamerLibraryLink';
 import SearchForm from './SearchForm';
 
 export default function Header() {
   return (
-    <header className="mb-6 items-center justify-between mx-10 max-lg:mt-12 lg:mt-6 max-lg:flex-col gap-y-5 flex">
+    <header className="mx-10 mb-6 flex items-center justify-between gap-y-5 max-lg:mt-12 max-lg:flex-col lg:mt-6">
       <SearchForm />
-      <GamerLibrary />
+      <GamerLibraryLink />
     </header>
   );
 }
