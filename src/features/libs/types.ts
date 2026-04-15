@@ -20,11 +20,14 @@ export interface IGDBNamedEntity extends IGDBBase {
 export interface IGDBPlatformFamily {
   id: number;
   name?: string;
+  slug?: string;
+  checksum?: string;
 }
 
 export interface IGDBPlatform {
   id: number;
   name: string;
+  category?: number;
   platform_family?: IGDBPlatformFamily;
 }
 
@@ -36,6 +39,8 @@ export interface IGDBCompany {
 export interface IGDBInvolvedCompany {
   id: number;
   company: IGDBCompany;
+  developer?: boolean;
+  publisher?: boolean;
 }
 
 export interface IGDBGame {
@@ -50,6 +55,7 @@ export interface IGDBGame {
   rating_count?: number;
 
   first_release_date?: number;
+  version_title?: string;
 
   cover?: IGDBImage;
   screenshots?: IGDBImage[];
@@ -62,4 +68,21 @@ export interface IGDBGame {
 
   platforms?: IGDBPlatform[];
   involved_companies?: IGDBInvolvedCompany[];
+}
+
+export interface IGDBGameListItem {
+  id: number;
+  slug: string;
+  name: string;
+
+  rating?: number;
+  rating_count?: number;
+
+  first_release_date?: number;
+  version_title?: string;
+
+  cover?: IGDBImage;
+
+  genres?: IGDBNamedEntity[];
+  platforms?: IGDBPlatform[];
 }
