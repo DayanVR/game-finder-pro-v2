@@ -7,7 +7,6 @@ import { useState } from 'react';
 
 export default function ImageGallery({ images }: { images: string[] }) {
   const [imageIndex, setImageIndex] = useState(1);
-
   const screenshotsList = images?.map((image) =>
     normalizeImage(image.replace('t_thumb', 't_1080p'))
   );
@@ -25,13 +24,13 @@ export default function ImageGallery({ images }: { images: string[] }) {
         pauseOnHover
       >
         {screenshotsList?.map((image, index) => (
-          <div key={index} className="h-full px-1 md:px-2">
+          <div key={index} className="relative size-fit">
             <Image
               src={image ?? '/img-not-found.jpg'}
               alt="Game Screenshot"
               width={500}
               height={500}
-              className="size-full overflow-hidden"
+              className="object-cover px-1 md:px-2"
             />
           </div>
         ))}
