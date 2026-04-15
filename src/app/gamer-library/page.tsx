@@ -4,7 +4,7 @@ import { NavigateBack } from '@/features/games/components/navigateBack';
 export default function GamerLibraryPage() {
   return (
     <>
-      <section className="flex h-full w-full items-center justify-between">
+      <div className="flex h-full w-full items-center justify-between">
         <NavigateBack />
         <button
           type="button"
@@ -16,9 +16,9 @@ export default function GamerLibraryPage() {
             Reset Library
           </span>
         </button>
-      </section>
+      </div>
 
-      <section className="mt-6 flex h-full w-full items-center justify-center">
+      <section className="flex h-full w-full items-center justify-center">
         <div>
           <h1 className="text-4xl font-bold">No games added to library</h1>
         </div>
