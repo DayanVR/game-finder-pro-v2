@@ -1,10 +1,42 @@
 'use client';
+
 import SearchGlass from '@/svg/SearchGlass';
+import { useEffect } from 'react';
+import useHandleFormSubmit from '@/features/games/hooks/handleFormSubmit';
+import useGameStore from '@/features/libs/store';
+import { useSearchParams } from 'next/navigation';
 
 export default function SearchForm() {
+  const handleFormSubmit = useHandleFormSubmit();
+  const searchParams = useSearchParams();
+  const { searchInput } = useGameStore();
+  const setSearchInput = useGameStore((state) => state.setSearchInput);
+
+  const queryInput = searchParams.get('searchInput') || '';
+
+  //  const searchParams = useSearchParams();
+  //  const pathname = usePathname();
+  //  const { replace } = useRouter();
+
+  //  const handleSearch = useDebouncedCallback((value) => {
+  //    const params = new URLSearchParams(searchParams);
+  //    params.set('page', '1');
+  //    if (value) {
+  //      params.set('query', value);
+  //    } else {
+  //      params.delete('query');
+  //    }
+  //    replace(`${pathname}?${params.toString()}`);
+  //  }, 300);
+  
+
+  useEffect(() => {
+    setSearchInput(queryInput);
+  }, [searchParams, queryInput]);
+
   return (
     <form
-      //   onSubmit={handleFormSubmit}
+      onSubmit={handleFormSubmit}
       className="mx-lg:md:justify-center w-fit max-lg:mx-auto max-md:space-y-4 sm:w-7/12 md:flex md:w-8/12 md:items-center"
     >
       <div className="group relative block w-full xl:w-9/12 2xl:w-8/12">
@@ -15,8 +47,9 @@ export default function SearchForm() {
         <input
           name="searchInput"
           id="search-input"
-          // value={searchInput}
           type="search"
+          value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
           className="w-full rounded-l-full border border-white/10 bg-(--color-bg-secondary) py-3 pl-12 text-lg font-medium text-white placeholder-gray-400 transition-all focus:ring-1 focus:outline-none max-md:rounded-full"
           placeholder="Find your game..."
         />
