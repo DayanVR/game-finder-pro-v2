@@ -9,19 +9,30 @@ import {
   ThemeProvider,
   createTheme,
 } from 'flowbite-react';
+import { sidebarIcons } from './sidebarIcons';
+import { updateURLParam} from '../libs/functions';
+import { useRouter, useSearchParams } from 'next/navigation';
 
-import Home from '@/features/svg/sidebar/home';
-import CirclePlus from '@/features/svg/sidebar/circlePlus';
-import TopGames from '@/features/svg/sidebar/topGames';
-import Platforms from '@/features/svg/sidebar/platforms';
-import AllPlatforms from '@/features/svg/sidebar/platforms/allPlatforms';
-import PlayStation from '@/features/svg/sidebar/platforms/playstation';
-import Xbox from '@/features/svg/sidebar/platforms/xbox';
-import Android from '@/features/svg/sidebar/platforms/android';
-import IOS from '@/features/svg/sidebar/platforms/ios';
-import Windows from '@/features/svg/sidebar/platforms/windows';
+
 
 export default function SidePanel() {
+  const {
+    Home,
+    CirclePlus,
+    TopGames,
+    Platforms,
+    AllPlatforms,
+    PlayStation,
+    Xbox,
+    Android,
+    IOS,
+    Windows,
+  } = sidebarIcons;
+  
+  
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
   const customTheme = createTheme({
     sidebar: {
       root: {
@@ -67,31 +78,78 @@ export default function SidePanel() {
 
         <SidebarItems>
           <SidebarItemGroup>
-            <SidebarItem href="/" icon={Home} className="text-2xl hover:text-(--color-accent-primary) hover:cursor-pointer transition-colors duration-150">
+            <SidebarItem
+              href="/"
+              icon={Home}
+              className="text-2xl transition-colors duration-150 hover:cursor-pointer hover:text-(--color-accent-primary)"
+            >
               Home
             </SidebarItem>
 
-            <SidebarCollapse label="New releases" icon={CirclePlus}>
-              <SidebarItem href="#">Last 30 days</SidebarItem>
-              <SidebarItem>This week</SidebarItem>
+            <SidebarCollapse label="New Releases" icon={CirclePlus}>
+              <SidebarItem onClick={() => updateURLParam('releasedGameDate', 'last-month', router, searchParams)}>
+                Last 30 days
+              </SidebarItem>
+              <SidebarItem onClick={() => updateURLParam('releasedGameDate', 'last-week', router, searchParams)}>
+                This week
+              </SidebarItem>
             </SidebarCollapse>
 
-            <SidebarCollapse label="Top games" icon={TopGames}>
-              <SidebarItem href="#">Game of the year</SidebarItem>
-              <SidebarItem>All time top 50</SidebarItem>
+            <SidebarCollapse label="Top Games" icon={TopGames}>
+              <SidebarItem onClick={() => updateURLParam('topGames', 'goty', router, searchParams)}>
+                Game of the year
+              </SidebarItem>
+              <SidebarItem
+                onClick={() => updateURLParam('topGames', 'top-50', router, searchParams)}
+              >
+                All time top 50
+              </SidebarItem>
             </SidebarCollapse>
 
             <SidebarCollapse label="Platforms" icon={Platforms}>
-              <SidebarItem icon={AllPlatforms}>All</SidebarItem>
-              <SidebarItem icon={Windows}>PC</SidebarItem>
-              <SidebarItem icon={Xbox}>Xbox</SidebarItem>
-              <SidebarItem icon={PlayStation} className="text-yellow-500">
+              <SidebarItem
+                icon={AllPlatforms}
+                onClick={() => updateURLParam('platform', '', router, searchParams)}
+              >
+                All
+              </SidebarItem>
+              <SidebarItem
+                icon={Windows}
+                onClick={() => updateURLParam('platform', '6', router, searchParams)}
+                data-default-value={'6'}
+              >
+                PC
+              </SidebarItem>
+              <SidebarItem
+                icon={Xbox}
+                onClick={() => updateURLParam('platform', '2', router, searchParams)}
+                data-default-value={'2'}
+              >
+                Xbox
+              </SidebarItem>
+              <SidebarItem
+                icon={PlayStation}
+                onClick={() => updateURLParam('platform', '1', router, searchParams)}
+                data-default-value={'1'}
+                className="text-yellow-500"
+              >
                 PlayStation
               </SidebarItem>
-              <SidebarItem icon={Android} className="text-red-500">
+              <SidebarItem
+                icon={Android}
+                onClick={() => updateURLParam('platform', '34', router, searchParams)}
+                data-default-value={'34'}
+                className="text-red-500"
+              >
                 Android
               </SidebarItem>
-              <SidebarItem icon={IOS}>IOS</SidebarItem>
+              <SidebarItem
+                icon={IOS}
+                onClick={() => updateURLParam('platform', '39', router, searchParams)}
+                data-default-value={'39'}
+              >
+                IOS
+              </SidebarItem>
             </SidebarCollapse>
           </SidebarItemGroup>
         </SidebarItems>
