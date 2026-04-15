@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="ml-72 flex min-h-screen max-w-[1536px] flex-col bg-black pt-6">
+      <body suppressHydrationWarning className="ml-72 flex min-h-screen max-w-[1536px] flex-col bg-black pt-6">
         <Header />
         <SidePanel />
         <main className="flex-1 px-12 py-6">{children}</main>
