@@ -10,10 +10,8 @@ import {
   createTheme,
 } from 'flowbite-react';
 import { sidebarIcons } from './sidebarIcons';
-import { updateURLParam} from '../libs/functions';
+import { updateURLParam } from '../libs/functions';
 import { useRouter, useSearchParams } from 'next/navigation';
-
-
 
 export default function SidePanel() {
   const {
@@ -28,8 +26,7 @@ export default function SidePanel() {
     IOS,
     Windows,
   } = sidebarIcons;
-  
-  
+
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -66,7 +63,7 @@ export default function SidePanel() {
     <ThemeProvider theme={customTheme}>
       <Sidebar
         aria-label="Sidebar with multi-level dropdown example"
-        className="fixed top-0 left-0 h-screen w-72 border-r-[3px] border-(--color-bg-secondary) text-white"
+        className="w-72 border-r-[3px] border-(--color-bg-secondary) text-white"
       >
         <SidebarItems>
           <h1 className="mt-12 bg-linear-to-r from-(--color-accent-primary) to-(--color-accent-secondary) bg-clip-text text-2xl font-bold text-transparent">
@@ -87,10 +84,18 @@ export default function SidePanel() {
             </SidebarItem>
 
             <SidebarCollapse label="New Releases" icon={CirclePlus}>
-              <SidebarItem onClick={() => updateURLParam('releasedGameDate', 'last-month', router, searchParams)}>
+              <SidebarItem
+                onClick={() =>
+                  updateURLParam('releasedGameDate', 'last-month', router, searchParams)
+                }
+              >
                 Last 30 days
               </SidebarItem>
-              <SidebarItem onClick={() => updateURLParam('releasedGameDate', 'last-week', router, searchParams)}>
+              <SidebarItem
+                onClick={() =>
+                  updateURLParam('releasedGameDate', 'last-week', router, searchParams)
+                }
+              >
                 This week
               </SidebarItem>
             </SidebarCollapse>
