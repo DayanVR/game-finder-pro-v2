@@ -18,6 +18,19 @@ export const fetchGameList = async ({
   orderBy?: boolean;
 }) => {
   try {
+    const searchFields = `
+      name,
+      cover.url,
+      genres.name,
+      platforms.name,
+      platforms.platform_type,
+      platforms.platform_family.*,
+      rating,
+      rating_count,
+      first_release_date,
+      slug,
+      version_title`;
+
     const whereFilters = [
       'rating != null',
       topGames === true
@@ -43,7 +56,6 @@ export const fetchGameList = async ({
               ? 'rating desc'
               : undefined;
     const sort = topGames === 'top-50' ? 'rating_count desc' : sortOption;
-    console.log(whereFilters);
 
     const response = await fetch('http://localhost:3001/api/games', {
       method: 'POST',
@@ -53,8 +65,7 @@ export const fetchGameList = async ({
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        fields:
-          'name,cover.url,genres.name,platforms.name,platforms.platform_type,platforms.platform_family.*,rating,rating_count,first_release_date,slug,version_title',
+        fields: searchFields,
         search: q,
         where: whereFilters,
         sort: sort || 'rating_count desc',
