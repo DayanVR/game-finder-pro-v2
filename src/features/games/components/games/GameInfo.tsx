@@ -28,58 +28,65 @@ export default function GameInfo({ gameDetails }: { gameDetails: IGDBGame }) {
 
   return (
     <>
-      <dl className="space-y-2 text-pretty [&_dt]:pt-2">
-        {first_release_date && (
-          <>
-            <dt>Release Date:</dt>
-            <dd>{formatDate}</dd>
-          </>
-        )}
-        {player_perspectives?.length !== undefined && player_perspectives?.length > 0 && (
-          <>
-            <dt>Player Perspectives:</dt>
-            <dd>
-              {player_perspectives?.map((player_perspective) => player_perspective.name).join(', ')}
-            </dd>
-          </>
-        )}
-        {game_modes?.length !== undefined && game_modes?.length > 0 && (
-          <>
-            <dt>Game Modes:</dt>
-            <dd>{game_modes?.map((game_mode) => game_mode.name).join(', ')}</dd>
-          </>
-        )}
-        {themes?.length !== undefined && themes?.length > 0 && (
-          <>
-            <dt>Themes:</dt>
-            <dd>{themes?.map((theme) => theme.name).join(', ')}</dd>
-          </>
-        )}
-        {developerCompany && (
-          <>
-            <dt>Developer:</dt>
-            <dd>{developerCompany?.company.name}</dd>
-          </>
-        )}
-        {publisherCompany && (
-          <>
-            <dt>Publisher:</dt>
-            <dd>{publisherCompany?.company.name}</dd>
-          </>
-        )}
-        {genres?.length !== undefined && genres?.length > 0 && (
-          <>
-            <dt>Genres:</dt>
-            <dd>{genres?.map((genre) => genre.name).join(', ')}</dd>
-          </>
-        )}
-        {platforms?.length !== undefined && platforms?.length > 0 && (
-          <>
-            <dt>Platforms:</dt>
-            <dd>{platforms?.map((platform) => platform.name).join(', ')}</dd>
-          </>
-        )}
-      </dl>
+      <div className="grid grid-cols-2 gap-x-8">
+        <dl className="space-y-2 text-pretty [&_dd]:pt-2 [&_dt]:pt-2 [&_dt]:font-semibold">
+          {themes?.length !== undefined && themes?.length > 0 && (
+            <>
+              <dt>Themes:</dt>
+              <dd>{themes?.map((theme) => theme.name).join(', ')}</dd>
+            </>
+          )}
+          {first_release_date && (
+            <>
+              <dt>Release Date:</dt>
+              <dd>{formatDate}</dd>
+            </>
+          )}
+          {player_perspectives?.length !== undefined && player_perspectives?.length > 0 && (
+            <>
+              <dt>Player Perspectives:</dt>
+              <dd>
+                {player_perspectives
+                  ?.map((player_perspective) => player_perspective.name)
+                  .join(', ')}
+              </dd>
+            </>
+          )}
+          {game_modes?.length !== undefined && game_modes?.length > 0 && (
+            <>
+              <dt>Game Modes:</dt>
+              <dd>{game_modes?.map((game_mode) => game_mode.name).join(', ')}</dd>
+            </>
+          )}
+        </dl>
+
+        <dl className="space-y-2 text-pretty [&_dd]:pt-2 [&_dt]:pt-2 [&_dt]:font-semibold">
+          {developerCompany && (
+            <>
+              <dt>Developer:</dt>
+              <dd>{developerCompany?.company.name}</dd>
+            </>
+          )}
+          {publisherCompany && (
+            <>
+              <dt>Publisher:</dt>
+              <dd>{publisherCompany?.company.name}</dd>
+            </>
+          )}
+          {genres?.length !== undefined && genres?.length > 0 && (
+            <>
+              <dt>Genres:</dt>
+              <dd>{genres?.map((genre) => genre.name).join(', ')}</dd>
+            </>
+          )}
+          {platforms?.length !== undefined && platforms?.length > 0 && (
+            <>
+              <dt>Platforms:</dt>
+              <dd>{platforms?.map((platform) => platform.name).join(', ')}</dd>
+            </>
+          )}
+        </dl>
+      </div>
       <div className="mx-auto p-2 xl:w-10/12">
         <div className="flex justify-around pb-6 sm:justify-center md:space-x-8 lg:pt-4 xl:pt-8">
           {summary && (
@@ -108,8 +115,10 @@ export default function GameInfo({ gameDetails }: { gameDetails: IGDBGame }) {
             </>
           )}
         </div>
-        {gameInfo === 'summary' && <p className="line-clamp-6 xl:mx-7">{summary}</p>}
-        {gameInfo === 'storyline' && <p className="line-clamp-6 xl:mx-7">{storyline}</p>}
+        {gameInfo === 'summary' && <p className="line-clamp-6 xl:mx-7 2xl:text-xl">{summary}</p>}
+        {gameInfo === 'storyline' && (
+          <p className="line-clamp-6 xl:mx-7 2xl:text-xl">{storyline}</p>
+        )}
       </div>
       <div>
         {videos && (
