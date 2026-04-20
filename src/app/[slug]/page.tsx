@@ -8,7 +8,6 @@ import GameInfo from '@/features/games/components/games/GameInfo';
 export default async function GamePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const gameDetails = await fetchGameDetails(slug);
-  console.log(gameDetails?.platforms);
   return (
     <>
       <div className="flex h-full w-full items-center justify-between">

@@ -39,7 +39,9 @@ export const fetchGameList = async ({
       platformId === '6' || platformId === '34' || platformId === '39'
         ? `platforms = ${platformId}`
         : '',
-      platformId === '1' || platformId === '2' ? `platforms.platform_family = ${platformId}` : '',
+      platformId === '1' || platformId === '2' || platformId === '5'
+        ? `platforms.platform_family = ${platformId}`
+        : '',
       releasedGameDate ? `first_release_date >= ${releasedGameDate}` : '',
     ]
       .filter(Boolean)
