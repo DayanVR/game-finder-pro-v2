@@ -13,7 +13,6 @@ import { sidebarIcons } from './sidebarIcons';
 import { updateURLParam } from '../libs/functions';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Gamepad } from '../svg/Gamepad';
-import Nintendo from '../svg/sidebar/platforms/nintendo';
 
 export default function SidePanel() {
   const {
@@ -27,6 +26,7 @@ export default function SidePanel() {
     Android,
     IOS,
     Windows,
+    Nintendo,
   } = sidebarIcons;
 
   const router = useRouter();
