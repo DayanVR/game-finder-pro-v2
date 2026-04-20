@@ -10,10 +10,10 @@ import {
   createTheme,
 } from 'flowbite-react';
 import { sidebarIcons } from './sidebarIcons';
-import { updateURLParam} from '../libs/functions';
+import { updateURLParam } from '../libs/functions';
 import { useRouter, useSearchParams } from 'next/navigation';
-
-
+import { Gamepad } from '../svg/Gamepad';
+import Nintendo from '../svg/sidebar/platforms/nintendo';
 
 export default function SidePanel() {
   const {
@@ -28,10 +28,12 @@ export default function SidePanel() {
     IOS,
     Windows,
   } = sidebarIcons;
-  
-  
+
   const router = useRouter();
   const searchParams = useSearchParams();
+  const platformParam = searchParams.get('platform');
+  const topGamesParam = searchParams.get('topGames');
+  const releasedGameDateParam = searchParams.get('releasedGameDate');
 
   const customTheme = createTheme({
     sidebar: {
@@ -62,15 +64,27 @@ export default function SidePanel() {
     },
   });
 
+  const platformsList = [
+    { name: 'All Platforms', id: '', icon: AllPlatforms },
+    { name: 'PC', id: '6', icon: Windows },
+    { name: 'Xbox', id: '2', icon: Xbox },
+    { name: 'Nintendo', id: '5', icon: Nintendo },
+    { name: 'PlayStation', id: '1', icon: PlayStation },
+    { name: 'Android', id: '34', icon: Android },
+    { name: 'IOS', id: '39', icon: IOS },
+  ];
+
   return (
     <ThemeProvider theme={customTheme}>
       <Sidebar
         aria-label="Sidebar with multi-level dropdown example"
-        className="fixed top-0 left-0 h-screen w-72 border-r-[3px] border-(--color-bg-secondary) text-white"
+        className="w-72 border-r-[3px] border-(--color-bg-secondary) text-white"
       >
         <SidebarItems>
-          <h1 className="mt-12 bg-linear-to-r from-(--color-accent-primary) to-(--color-accent-secondary) bg-clip-text text-2xl font-bold text-transparent">
-            Game Finder <span className="text-white">PRO</span>
+          <h1 className="mt-12 flex items-center justify-center text-2xl font-bold text-white">
+            <Gamepad className="mr-2 size-10 rounded-lg bg-(--color-accent-primary)/20 p-1.5 text-(--color-accent-primary)" />{' '}
+            GameFinder
+            <span className="text-(--color-accent-primary)">PRO</span>
           </h1>
         </SidebarItems>
 
@@ -87,19 +101,49 @@ export default function SidePanel() {
             </SidebarItem>
 
             <SidebarCollapse label="New Releases" icon={CirclePlus}>
-              <SidebarItem onClick={() => updateURLParam('releasedGameDate', 'last-month', router, searchParams)}>
+              <SidebarItem
+                className={
+                  releasedGameDateParam === 'last-month'
+                    ? 'bg-(--color-accent-primary)/20! text-(--color-accent-primary)!'
+                    : 'text-white/60! hover:text-white!'
+                }
+                onClick={() =>
+                  updateURLParam('releasedGameDate', 'last-month', router, searchParams)
+                }
+              >
                 Last 30 days
               </SidebarItem>
-              <SidebarItem onClick={() => updateURLParam('releasedGameDate', 'last-week', router, searchParams)}>
+              <SidebarItem
+                className={
+                  releasedGameDateParam === 'last-week'
+                    ? 'bg-(--color-accent-primary)/20! text-(--color-accent-primary)!'
+                    : 'text-white/60! hover:text-white!'
+                }
+                onClick={() =>
+                  updateURLParam('releasedGameDate', 'last-week', router, searchParams)
+                }
+              >
                 This week
               </SidebarItem>
             </SidebarCollapse>
 
             <SidebarCollapse label="Top Games" icon={TopGames}>
-              <SidebarItem onClick={() => updateURLParam('topGames', 'goty', router, searchParams)}>
+              <SidebarItem
+                className={
+                  topGamesParam === 'goty'
+                    ? 'bg-(--color-accent-primary)/20! text-(--color-accent-primary)!'
+                    : 'text-white/60! hover:text-white!'
+                }
+                onClick={() => updateURLParam('topGames', 'goty', router, searchParams)}
+              >
                 Game of the year
               </SidebarItem>
               <SidebarItem
+                className={
+                  topGamesParam === 'top-50'
+                    ? 'bg-(--color-accent-primary)/20! text-(--color-accent-primary)!'
+                    : 'text-white/60! hover:text-white!'
+                }
                 onClick={() => updateURLParam('topGames', 'top-50', router, searchParams)}
               >
                 All time top 50
@@ -107,49 +151,21 @@ export default function SidePanel() {
             </SidebarCollapse>
 
             <SidebarCollapse label="Platforms" icon={Platforms}>
-              <SidebarItem
-                icon={AllPlatforms}
-                onClick={() => updateURLParam('platform', '', router, searchParams)}
-              >
-                All
-              </SidebarItem>
-              <SidebarItem
-                icon={Windows}
-                onClick={() => updateURLParam('platform', '6', router, searchParams)}
-                data-default-value={'6'}
-              >
-                PC
-              </SidebarItem>
-              <SidebarItem
-                icon={Xbox}
-                onClick={() => updateURLParam('platform', '2', router, searchParams)}
-                data-default-value={'2'}
-              >
-                Xbox
-              </SidebarItem>
-              <SidebarItem
-                icon={PlayStation}
-                onClick={() => updateURLParam('platform', '1', router, searchParams)}
-                data-default-value={'1'}
-                className="text-yellow-500"
-              >
-                PlayStation
-              </SidebarItem>
-              <SidebarItem
-                icon={Android}
-                onClick={() => updateURLParam('platform', '34', router, searchParams)}
-                data-default-value={'34'}
-                className="text-red-500"
-              >
-                Android
-              </SidebarItem>
-              <SidebarItem
-                icon={IOS}
-                onClick={() => updateURLParam('platform', '39', router, searchParams)}
-                data-default-value={'39'}
-              >
-                IOS
-              </SidebarItem>
+              {platformsList.map((platform) => (
+                <SidebarItem
+                  className={
+                    platformParam === platform.id
+                      ? 'bg-(--color-accent-primary)/20! text-(--color-accent-primary)!'
+                      : 'text-white/60! hover:text-white!'
+                  }
+                  key={platform.id}
+                  icon={platform.icon}
+                  onClick={() => updateURLParam('platform', platform.id, router, searchParams)}
+                  data-default-value={platform.id}
+                >
+                  {platform.name}
+                </SidebarItem>
+              ))}
             </SidebarCollapse>
           </SidebarItemGroup>
         </SidebarItems>

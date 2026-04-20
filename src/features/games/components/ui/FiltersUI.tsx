@@ -41,6 +41,8 @@ const FiltersUI = ({
         return setUITitle('Android Games');
       } else if (platformId === '39') {
         return setUITitle('IOS Games');
+      } else if (platformId === '5') {
+        return setUITitle('Nintendo Games');
       } else {
         return setUITitle('All Platforms');
       }

@@ -5,8 +5,8 @@
 :root {
   --color-bg-primary: #0f172a;
   --color-bg-secondary: #1e293b;
-  --color-accent-primary: #8b5cf6; /* Violet */
-  --color-accent-secondary: #06b6d4; /* Cyan */
+  --color-accent-primary: #8b5cf6;
+  --color-accent-secondary: #06b6d4;
   --color-text-primary: #f8fafc;
   --color-text-secondary: #94a3b8;
 }

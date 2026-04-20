@@ -7,7 +7,7 @@ import { normalizeImage } from '@/features/libs/normalizeImage';
 import { formattedDate } from '@/features/libs/functions';
 
 export default function GameCard({ game }: { game: IGDBGameListItem }) {
-  const { Windows, PlayStation, Xbox, Android, IOS } = sidebarIcons;
+  const { Windows, PlayStation, Xbox, Android, IOS, Nintendo } = sidebarIcons;
 
   const platformIcons = useMemo(() => {
     if (!game.platforms) return [];
@@ -25,6 +25,8 @@ export default function GameCard({ game }: { game: IGDBGameListItem }) {
         iconsPlatforms.add('android');
       } else if (id === 39 && !iconsPlatforms.has('apple')) {
         iconsPlatforms.add('apple');
+      } else if (platform_family?.id === 5 && !iconsPlatforms.has('nintendo')) {
+        iconsPlatforms.add('nintendo');
       }
     });
     return [...iconsPlatforms];
@@ -63,15 +65,15 @@ export default function GameCard({ game }: { game: IGDBGameListItem }) {
       <div className="flex h-[180px] flex-col justify-between p-5">
         <div>
           <div className="flex items-center justify-between">
-            <div className="flex space-x-3 text-gray-400">
+            <div className="flex space-x-2">
               {platformIcons.map((icon, index) => (
                 <div key={index} className="size-6">
-                  {' '}
                   {icon === 'windows' && <Windows />}
                   {icon === 'playstation' && <PlayStation />}
                   {icon === 'xbox' && <Xbox />}
                   {icon === 'android' && <Android />}
                   {icon === 'apple' && <IOS />}
+                  {icon === 'nintendo' && <Nintendo />}
                 </div>
               ))}
             </div>

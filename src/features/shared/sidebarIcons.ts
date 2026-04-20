@@ -8,6 +8,7 @@ import Xbox from '@/features/svg/sidebar/platforms/xbox';
 import Android from '@/features/svg/sidebar/platforms/android';
 import IOS from '@/features/svg/sidebar/platforms/ios';
 import Windows from '@/features/svg/sidebar/platforms/windows';
+import Nintendo from '@/features/svg/sidebar/platforms/nintendo';
 
 export const sidebarIcons = {
   Home,
@@ -20,4 +21,5 @@ export const sidebarIcons = {
   Android,
   IOS,
   Windows,
+  Nintendo,
 };

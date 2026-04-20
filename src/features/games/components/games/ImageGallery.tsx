@@ -17,7 +17,7 @@ export default function ImageGallery({ images }: { images: string[] }) {
       </h2>
       <Carousel
         onSlideChange={(index) => setImageIndex(index + 1)}
-        className="mx-auto h-56 w-11/12 sm:h-64 sm:w-8/12 md:w-8/12 lg:h-80 lg:w-8/12 xl:w-6/12 2xl:h-96 2xl:w-[600px]"
+        className="mx-auto h-56 w-11/12 sm:h-64 sm:w-8/12 md:w-8/12 lg:h-80 lg:w-8/12 xl:w-6/12 2xl:h-96 2xl:w-[800px]"
         slide={true}
         slideInterval={3000}
         indicators={false}
@@ -28,9 +28,9 @@ export default function ImageGallery({ images }: { images: string[] }) {
             <Image
               src={image ?? '/img-not-found.jpg'}
               alt="Game Screenshot"
-              width={500}
-              height={500}
-              className="object-cover px-1 md:px-2"
+              width={690}
+              height={700}
+              className="aspect-video object-contain px-1 md:px-2"
             />
           </div>
         ))}

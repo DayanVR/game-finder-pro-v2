@@ -32,14 +32,14 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
               '/img-not-found.jpg'
             }
             alt={gameDetails.name ?? ''}
-            width={500}
-            height={500}
-            className="aspect-square size-[600px] object-cover"
+            width={660}
+            height={370}
+            className="mx-auto aspect-video h-full w-8/12"
           />
         )}
 
         <div>
-          <h1 className="my-6 text-4xl font-semibold text-balance text-(--color-accent-secondary) max-lg:mx-2 max-lg:text-center md:text-5xl lg:w-6/12 lg:pt-4 xl:w-7/12 xl:text-6xl 2xl:w-5/12">
+          <h1 className="my-6 text-4xl font-semibold text-balance text-(--color-accent-secondary) max-lg:mx-2 max-lg:text-center md:text-5xl lg:w-6/12 lg:pt-4 xl:w-7/12 xl:text-6xl 2xl:w-full">
             {gameDetails ? gameDetails.name : 'Game not found'}
           </h1>
 
