@@ -95,7 +95,7 @@ export default function SidePanel() {
             <SidebarItem
               href="/"
               icon={Home}
-              className="text-2xl transition-colors duration-150 hover:cursor-pointer hover:text-(--color-accent-primary)"
+              className="text-2xl transition-colors duration-150 hover:cursor-pointer"
             >
               Home
             </SidebarItem>
