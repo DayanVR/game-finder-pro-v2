@@ -11,9 +11,9 @@ export default function ImageGallery({ images }: { images: string[] }) {
     normalizeImage(image.replace('t_thumb', 't_1080p'))
   );
   return (
-    <div className="space-y-4 py-4 lg:space-y-8 lg:py-8">
-      <h2 className="bg-linear-to-r from-(--color-accent-primary) to-(--color-accent-secondary) bg-clip-text text-center text-2xl font-bold text-transparent md:text-4xl xl:text-6xl">
-        CAPTURES
+    <div className="space-y-4 mt-12 rounded-2xl border border-white/10 bg-(--color-bg-secondary) py-4 lg:space-y-8 lg:py-8">
+      <h2 className="mx-6 text-lg font-semibold text-(--color-accent-primary) md:text-xl xl:text-2xl">
+        GAME <span className="text-white">CAPTURES</span>
       </h2>
       <Carousel
         onSlideChange={(index) => setImageIndex(index + 1)}
