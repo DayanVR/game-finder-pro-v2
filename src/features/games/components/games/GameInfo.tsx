@@ -20,7 +20,7 @@ export default function GameInfo({ gameDetails }: { gameDetails: IGDBGame }) {
     screenshots,
     themes,
   } = gameDetails;
-  const { Star, Calendar, Controller, Desktop, Developer, Gallery, People, Suitcase } =
+  const {Desktop, Developer, Suitcase } =
     detailsIcons;
 
   const developerCompany = involved_companies?.find((company) => company.developer);

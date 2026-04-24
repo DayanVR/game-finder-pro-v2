@@ -1,45 +1,25 @@
 'use client';
-
-import { Carousel } from 'flowbite-react';
 import { normalizeImage } from '@/features/libs/normalizeImage';
-import Image from 'next/image';
-import { useState } from 'react';
+import { detailsIcons } from '@/features/shared/gameDetailsIcons';
+import Gallery from '@/games/components/ui/Gallery';
 
 export default function ImageGallery({ images }: { images: string[] }) {
-  const [imageIndex, setImageIndex] = useState(1);
-  const screenshotsList = images?.map((image) =>
-    normalizeImage(image.replace('t_thumb', 't_1080p'))
-  );
+  const { Gallery: GalleryIcon } = detailsIcons;
+  const screenshotsList = images
+    .map((image) => normalizeImage(image.replace('t_thumb', 't_1080p')))
+    .filter((image): image is string => image !== null);
   return (
-    <div className="space-y-4 mt-12 rounded-2xl border border-white/10 bg-(--color-bg-secondary) py-4 lg:space-y-8 lg:py-8">
-      <h2 className="mx-6 text-lg font-semibold text-(--color-accent-primary) md:text-xl xl:text-2xl">
-        GAME <span className="text-white">CAPTURES</span>
-      </h2>
-      <Carousel
-        onSlideChange={(index) => setImageIndex(index + 1)}
-        className="mx-auto h-56 w-11/12 sm:h-64 sm:w-8/12 md:w-8/12 lg:h-80 lg:w-8/12 xl:w-6/12 2xl:h-96 2xl:w-[800px]"
-        slide={true}
-        slideInterval={3000}
-        indicators={false}
-        pauseOnHover
-      >
-        {screenshotsList?.map((image, index) => (
-          <div key={index} className="relative size-fit">
-            <Image
-              src={image ?? '/img-not-found.jpg'}
-              alt="Game Screenshot"
-              width={690}
-              height={700}
-              className="aspect-video object-contain px-1 md:px-2"
-            />
-          </div>
-        ))}
-      </Carousel>
-      <div className="text-center">
-        <span className="text-2xl font-semibold lg:text-3xl">
-          {imageIndex} of {screenshotsList?.length}
-        </span>
+    <div className="mt-12 space-y-4 rounded-2xl border border-white/10 bg-(--color-bg-secondary) px-6 py-4 lg:space-y-8 lg:py-12">
+      <div className="flex items-center gap-4">
+        <div className="rounded-lg bg-(--color-accent-primary)/20 p-2">
+          <GalleryIcon className="size-6 text-(--color-accent-primary)" />
+        </div>
+        <h2 className="text-lg font-semibold text-(--color-accent-primary) md:text-xl xl:text-2xl">
+          GAME <span className="text-white">CAPTURES</span>
+        </h2>
       </div>
+      <Gallery images={screenshotsList} />
+      <div className="custom-pagination mx-auto mt-4 w-fit text-center text-xl"></div>
     </div>
   );
 }
