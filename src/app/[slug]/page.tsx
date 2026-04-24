@@ -71,7 +71,7 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
       <section className="relative flex gap-8">
         <div className="my-3 w-full max-w-[300px] justify-self-center lg:my-8">
           {gameDetails && (
-            <div className="group relative aspect-3/4 overflow-hidden rounded-2xl border border-black/50 shadow-2xl shadow-[#e7000b]/20 transition-transform duration-300 hover:scale-[1.02]">
+            <div className="group relative aspect-3/4 overflow-hidden rounded-2xl border border-black/50 shadow-2xl shadow-[#e7000b]/30 transition-transform duration-300 hover:scale-[1.02]">
               <Image
                 src={
                   normalizeImage(gameDetails.cover?.url.replace('t_thumb', 't_720p')) ??
