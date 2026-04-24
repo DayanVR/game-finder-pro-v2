@@ -34,8 +34,8 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
 
   const ratingComponent = rating ? (
     <div className="flex items-center gap-4">
-      <div className="flex w-fit items-center gap-x-2 rounded-full bg-(--color-accent-primary)/20 px-4 py-3">
-        <Star className="size-6 fill-(--color-accent-primary)" />
+      <div className="flex w-fit items-center gap-x-2 rounded-full bg-(--color-accent-primary)/20 px-4 py-2">
+        <Star className="size-5 fill-(--color-accent-primary)" />
         <span className="text-2xl font-semibold text-(--color-accent-primary)">
           {rating.toFixed(0)}
         </span>
@@ -69,7 +69,7 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
       <div className="from-primary/20 absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] via-transparent to-transparent" /> */}
 
       <section className="relative flex gap-8">
-        <div className="mx-auto w-full max-w-[300px] justify-self-center lg:mx-0">
+        <div className="my-3 w-full max-w-[300px] justify-self-center lg:my-8">
           {gameDetails && (
             <div className="group relative aspect-3/4 overflow-hidden rounded-2xl border border-black/50 shadow-2xl shadow-[#e7000b]/20 transition-transform duration-300 hover:scale-[1.02]">
               <Image
@@ -88,33 +88,33 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
         </div>
 
         <div className="flex flex-col justify-center gap-y-4">
-          <h1 className="my-4 text-4xl font-semibold text-balance md:text-5xl lg:w-6/12 xl:w-7/12 xl:text-6xl 2xl:w-full">
+          <h1 className="text-4xl font-semibold text-balance md:text-5xl lg:w-6/12 xl:w-7/12 xl:text-6xl 2xl:w-full">
             {gameDetails ? gameDetails.name : 'Game not found'}
           </h1>
           {ratingComponent}
           <div className="flex gap-4">
             {formatDate && (
-              <p className="flex items-center gap-2 text-white/70">
-                <Calendar className="size-4 text-(--color-accent-secondary)" />
+              <p className="flex items-center gap-2 text-sm text-white/70">
+                <Calendar className="size-4 text-(--color-accent-primary)" />
                 {formatDate}
               </p>
             )}
             {player_perspectives && (
-              <p className="flex items-center gap-2 text-white/70">
-                <Controller className="size-6 text-(--color-accent-secondary)" />
+              <p className="flex items-center gap-2 text-sm text-white/70">
+                <Controller className="size-6 text-(--color-accent-primary)" />
                 {player_perspectives
                   ?.map((player_perspective) => player_perspective.name)
                   .join(', ')}
               </p>
             )}
             {game_modes && (
-              <p className="flex items-center gap-2 text-white/70">
-                <People className="size-6 text-(--color-accent-secondary)" />
+              <p className="flex items-center gap-2 text-sm text-white/70">
+                <People className="size-6 text-(--color-accent-primary)" />
                 {game_modes?.map((game_mode) => game_mode.name).join(', ')}
               </p>
             )}
           </div>
-          <div className="flex gap-3 text-(--color-accent-primary)">
+          <div className="flex gap-3 text-(--color-accent-primary) text-sm">
             {genres?.map((genre) => (
               <p
                 className="py-.5 rounded-full border border-(--color-accent-secondary)/40 bg-(--color-accent-secondary)/10 px-2 font-bold"
@@ -124,7 +124,7 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
               </p>
             ))}
           </div>
-          <div className="flex gap-6 px-2">
+          <div className="flex gap-6 px-2 text-sm">
             {themes?.map((theme) => (
               <p key={theme.name}>{theme.name}</p>
             ))}
