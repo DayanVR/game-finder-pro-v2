@@ -11,7 +11,7 @@ export default function Footer() {
               href="/"
               className="text-foreground hover:text-primary flex items-center gap-2 transition-colors"
             >
-              <Controller className="text-primary h-6 w-6" />
+              <Controller className="text-(--color-accent-primary) h-6 w-6" />
               <span className="text-lg font-bold">Game Finder PRO</span>
             </Link>
             <p className="mt-4 text-sm leading-relaxed text-white/60">
