@@ -65,9 +65,9 @@ export default function GameCard({ game }: { game: IGDBGameListItem }) {
       <div className="flex h-[180px] flex-col justify-between p-5">
         <div>
           <div className="flex items-center justify-between">
-            <div className="flex space-x-2">
+            <div className="flex gap-x-1.5">
               {platformIcons.map((icon, index) => (
-                <div key={index} className="size-6">
+                <div key={index} className="flex size-5.5 flex-col content-center items-center">
                   {icon === 'windows' && <Windows />}
                   {icon === 'playstation' && <PlayStation />}
                   {icon === 'xbox' && <Xbox />}

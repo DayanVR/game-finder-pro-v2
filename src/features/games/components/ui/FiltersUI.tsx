@@ -2,7 +2,7 @@
 
 import useGameStore from '@/features/libs/store';
 import Selection from '../Selection';
-import { useState, useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
 const FiltersUI = ({
   q,
@@ -54,7 +54,6 @@ const FiltersUI = ({
     <div className="mt-6 mb-10 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
       <h1 className="text-4xl lg:text-left xl:text-5xl 2xl:text-6xl">{UITitle}</h1>
       <Selection searchGame={q && q.length > 0 ? true : false} />
-      {/* <Pagination /> */}
     </div>
   );
 };

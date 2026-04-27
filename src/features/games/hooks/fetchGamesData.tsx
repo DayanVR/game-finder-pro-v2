@@ -6,8 +6,8 @@ export const fetchGameList = async ({
   sortBy,
   topGames,
   platformId,
+  limit = 12,
   releasedGameDate,
-  orderBy,
 }: {
   q?: string | null;
   offset?: number;
@@ -15,7 +15,7 @@ export const fetchGameList = async ({
   topGames?: boolean | undefined | string;
   platformId?: string;
   releasedGameDate?: string;
-  orderBy?: boolean;
+  limit?: number;
 }) => {
   try {
     const searchFields = `
@@ -59,27 +59,65 @@ export const fetchGameList = async ({
               : undefined;
     const sort = topGames === 'top-50' ? 'rating_count desc' : sortOption;
 
-    const response = await fetch('http://localhost:3001/api/games', {
-      method: 'POST',
-      headers: {
-        'Client-ID': process.env.NEXT_PUBLIC_CLIENT_ID!,
-        Authorization: process.env.NEXT_PUBLIC_AUTH_TOKEN!,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        fields: searchFields,
-        search: q,
-        where: whereFilters,
-        sort: sort || 'rating_count desc',
-        limit: orderBy ? 50 : 12,
-        offset: offset || 0,
+    // const response = await fetch('http://localhost:3001/api/games', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Client-ID': process.env.NEXT_PUBLIC_CLIENT_ID!,
+    //     Authorization: process.env.NEXT_PUBLIC_AUTH_TOKEN!,
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({
+    //     fields: searchFields,
+    //     search: q,
+    //     where: whereFilters,
+    //     sort: sort || 'rating_count desc',
+    //     limit,
+    //     offset: offset || 0,
+    //   }),
+    // });
+
+    const [gamesRes, countRes] = await Promise.all([
+      fetch('http://localhost:3001/api/games', {
+        method: 'POST',
+        headers: {
+          'Client-ID': process.env.NEXT_PUBLIC_CLIENT_ID!,
+          Authorization: process.env.NEXT_PUBLIC_AUTH_TOKEN!,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          fields: searchFields,
+          search: q,
+          where: whereFilters,
+          sort: sort || 'rating_count desc',
+          limit,
+          offset: offset || 0,
+        }),
       }),
-    });
 
-    if (!response.ok) throw new Error(`HTTP error ${response.status}`);
+      fetch('https://api.igdb.com/v4/games/count', {
+        method: 'POST',
+        headers: {
+          'Client-ID': process.env.NEXT_PUBLIC_CLIENT_ID!,
+          Authorization: process.env.NEXT_PUBLIC_AUTH_TOKEN!,
+          'Content-Type': 'text/plain',
+        },
+        body: `where ${whereFilters};`,
+      }),
+    ]);
 
-    const data: IGDBGameListItem[] = await response.json();
-    return data;
+    if (!gamesRes.ok || !countRes.ok) {
+      throw new Error('Error fetching data');
+    }
+    const data: IGDBGameListItem[] = await gamesRes.json();
+    const { count } = await countRes.json();
+
+    // if (!response.ok) throw new Error(`HTTP error ${response.status}`);
+
+    // const data: IGDBGameListItem[] = await response.json();
+    return {
+      data,
+      totalPages: Math.ceil(count / limit),
+    };
   } catch (error) {
     console.error('Error fetching game list:', error);
   }

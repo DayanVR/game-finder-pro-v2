@@ -11,9 +11,8 @@ import {
 } from 'flowbite-react';
 import { sidebarIcons } from './sidebarIcons';
 import { updateURLParam } from '../libs/functions';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import { Gamepad } from '../svg/Gamepad';
-import { usePathname } from 'next/navigation';
 
 export default function SidePanel() {
   const {
