@@ -1,12 +1,12 @@
 export default function InfoCall() {
   const infoList = [
-    { text: 'Games', data: '850,000+' },
+    { text: 'Games', data: '30,000+' },
     { text: 'Genres', data: '19' },
     { text: 'Platforms', data: '6' },
     { text: 'Updated', data: 'Daily' },
   ];
   return (
-    <div className="mx-auto mt-8 flex max-w-11/12 items-center justify-evenly gap-6 text-center">
+    <div className="mx-auto mt-8 flex flex-wrap max-w-11/12 items-center justify-evenly gap-6 text-center">
       {infoList.map((info) => (
         <div
           key={info.text}

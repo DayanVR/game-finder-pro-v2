@@ -78,7 +78,7 @@ export default function SidePanel() {
     <ThemeProvider theme={customTheme}>
       <Sidebar
         aria-label="Sidebar with multi-level dropdown example"
-        className="w-72 border-r-[3px] border-(--color-bg-secondary) text-white"
+        className="w-72 border-r-[3px] border-white/10 text-white"
       >
         <SidebarItems>
           <h1 className="mt-12 flex items-center justify-center text-2xl font-bold text-white">

@@ -17,7 +17,7 @@ function Selection(props: { searchGame: boolean }) {
       <select
         onChange={(e) => updateURLParam('sortBy', e.target.value, router, searchParams, pathname)}
         disabled={props.searchGame}
-        className="rounded-md bg-(--color-bg-secondary) text-white/60 px-2 py-2.5 md:px-6"
+        className="rounded-md bg-(--primary) px-2 py-2.5 text-white/60 hover:fill-red-400 md:px-6"
         id="sorting"
       >
         <optgroup label="Rating:">
@@ -31,7 +31,7 @@ function Selection(props: { searchGame: boolean }) {
       </select>
       <select
         title="platforms"
-        className="rounded-md bg-black/30 px-2 py-2.5 md:px-6 xl:hidden"
+        className="rounded-md bg-(--primary) px-2 py-2.5 md:px-6 lg:hidden"
         onChange={(e) => updateURLParam('platform', e.target.value, router, searchParams, pathname)}
       >
         <option value="0">All Platforms</option>

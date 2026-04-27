@@ -2,7 +2,6 @@ import { Suspense } from 'react';
 import VideoGamesList from '@/features/games/components/ui/VideoGamesList';
 import FiltersUI from '@/features/games/components/ui/FiltersUI';
 import { handleDateChange } from '@/features/libs/functions';
-import { PaginationComponent } from '@/features/shared/Pagination';
 
 export default async function Home({
   searchParams,
@@ -34,7 +33,7 @@ export default async function Home({
   }
 
   return (
-    <section className="space-y-10">
+    <section className="space-y-4 lg:space-y-8">
       <FiltersUI
         q={q}
         sortBy={sortBy}
