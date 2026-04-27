@@ -114,7 +114,7 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
               </p>
             )}
           </div>
-          <div className="flex gap-3 text-(--color-accent-primary) text-sm">
+          <div className="flex gap-3 text-sm text-(--color-accent-primary)">
             {genres?.map((genre) => (
               <p
                 className="py-.5 rounded-full border border-(--color-accent-secondary)/40 bg-(--color-accent-secondary)/10 px-2 font-bold"

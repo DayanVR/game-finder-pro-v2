@@ -4,6 +4,7 @@ import Header from '@/shared/header/Header';
 import SidePanel from '@/shared/SidePanel';
 import IntroCall from '@/features/shared/IntroCall';
 import InfoCall from '@/features/shared/InfoCards';
+import Footer from '@/features/shared/Footer';
 
 export const metadata: Metadata = {
   title: 'Game Finder Pro',
@@ -27,7 +28,7 @@ export default function RootLayout({
             <Header />
             <InfoCall />
             <main className="px-12 py-6">{children}</main>
-            <footer className="bg-black p-6">footer</footer>
+            <Footer />
           </div>
         </div>
       </body>
