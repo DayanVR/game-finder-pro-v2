@@ -20,7 +20,7 @@ export default function RootLayout({
     <html lang="en" className="bg-(--color-bg-secondary)">
       <body suppressHydrationWarning className="flex justify-center bg-(--color-bg-secondary)">
         <div className="flex min-h-screen w-full max-w-[1536px]">
-          <div className="sticky top-0 h-screen shrink-0">
+          <div className="sticky max-lg:hidden top-0 h-screen shrink-0">
             <SidePanel />
           </div>
           <div className="w-full flex-1 pt-7">
