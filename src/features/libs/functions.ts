@@ -18,10 +18,14 @@ export const updateURLParam = (
     params.delete(key);
   }
 
+  if (key !== 'page') {
+    params.set('page', '1');
+  }
+
   const query = params.toString();
 
   const isGamePage = pathname !== '/';
-  
+
   if (isGamePage) {
     router.push(`/${query ? `?${query}` : ''}`);
   } else {

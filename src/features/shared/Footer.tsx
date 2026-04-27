@@ -3,7 +3,7 @@ import Controller from '../svg/detailsPage/Controller';
 
 export default function Footer() {
   return (
-    <footer className="border-border/40 bg-card/50 mt-16 border-t">
+    <footer className="mt-10 border-t border-white/10 bg-(--color-bg-secondary)">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
           <div className="md:col-span-1">
@@ -14,15 +14,15 @@ export default function Footer() {
               <Controller className="text-primary h-6 w-6" />
               <span className="text-lg font-bold">Game Finder PRO</span>
             </Link>
-            <p className="text-muted-foreground mt-4 text-sm leading-relaxed">
+            <p className="mt-4 text-sm leading-relaxed text-white/60">
               Discover, track, and organize your favorite games. Your ultimate companion for gaming
               exploration.
             </p>
           </div>
 
           <div>
-            <h3 className="text-foreground mb-4 font-semibold">Explore</h3>
-            <ul className="space-y-3">
+            <h3 className="mb-4 font-semibold">Explore</h3>
+            <ul className="space-y-3 text-white/60">
               <li>
                 <Link
                   href="#"
@@ -59,8 +59,8 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-foreground mb-4 font-semibold">Categories</h3>
-            <ul className="space-y-3">
+            <h3 className="mb-4 font-semibold">Categories</h3>
+            <ul className="space-y-3 text-white/60">
               <li>
                 <Link
                   href="#"
@@ -97,8 +97,8 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-foreground mb-4 font-semibold">Support</h3>
-            <ul className="space-y-3">
+            <h3 className="mb-4 font-semibold">Support</h3>
+            <ul className="space-y-3 text-white/60">
               <li>
                 <Link
                   href="#"
@@ -135,8 +135,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-border/40 mt-12 gap-4 border-t pt-8 sm:flex-row">
-          <p className="text-muted-foreground text-sm">
+        <div className="mt-12 gap-4 border-t border-white/10 pt-8">
+          <p className="text-sm text-white/60">
             © {new Date().getFullYear()} Game Finder PRO. All rights reserved.
           </p>
         </div>

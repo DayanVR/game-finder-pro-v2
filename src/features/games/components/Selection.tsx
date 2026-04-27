@@ -17,7 +17,7 @@ function Selection(props: { searchGame: boolean }) {
       <select
         onChange={(e) => updateURLParam('sortBy', e.target.value, router, searchParams, pathname)}
         disabled={props.searchGame}
-        className="rounded-md bg-black/30 px-2 py-2.5 md:px-6"
+        className="rounded-md bg-(--color-bg-secondary) text-white/60 px-2 py-2.5 md:px-6"
         id="sorting"
       >
         <optgroup label="Rating:">
