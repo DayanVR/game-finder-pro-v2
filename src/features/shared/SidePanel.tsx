@@ -13,6 +13,7 @@ import { sidebarIcons } from './sidebarIcons';
 import { updateURLParam } from '../libs/functions';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Gamepad } from '../svg/Gamepad';
+import { usePathname } from 'next/navigation';
 
 export default function SidePanel() {
   const {
@@ -28,7 +29,7 @@ export default function SidePanel() {
     Windows,
     Nintendo,
   } = sidebarIcons;
-
+  const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
   const platformParam = searchParams.get('platform');
@@ -108,7 +109,7 @@ export default function SidePanel() {
                     : 'text-white/60! hover:text-white!'
                 }
                 onClick={() =>
-                  updateURLParam('releasedGameDate', 'last-month', router, searchParams)
+                  updateURLParam('releasedGameDate', 'last-month', router, searchParams, pathname)
                 }
               >
                 Last 30 days
@@ -120,7 +121,7 @@ export default function SidePanel() {
                     : 'text-white/60! hover:text-white!'
                 }
                 onClick={() =>
-                  updateURLParam('releasedGameDate', 'last-week', router, searchParams)
+                  updateURLParam('releasedGameDate', 'last-week', router, searchParams, pathname)
                 }
               >
                 This week
@@ -134,7 +135,7 @@ export default function SidePanel() {
                     ? 'bg-(--color-accent-primary)/20! text-(--color-accent-primary)!'
                     : 'text-white/60! hover:text-white!'
                 }
-                onClick={() => updateURLParam('topGames', 'goty', router, searchParams)}
+                onClick={() => updateURLParam('topGames', 'goty', router, searchParams, pathname)}
               >
                 Game of the year
               </SidebarItem>
@@ -144,7 +145,7 @@ export default function SidePanel() {
                     ? 'bg-(--color-accent-primary)/20! text-(--color-accent-primary)!'
                     : 'text-white/60! hover:text-white!'
                 }
-                onClick={() => updateURLParam('topGames', 'top-50', router, searchParams)}
+                onClick={() => updateURLParam('topGames', 'top-50', router, searchParams, pathname)}
               >
                 All time top 50
               </SidebarItem>
@@ -160,7 +161,9 @@ export default function SidePanel() {
                   }
                   key={platform.id}
                   icon={platform.icon}
-                  onClick={() => updateURLParam('platform', platform.id, router, searchParams)}
+                  onClick={() =>
+                    updateURLParam('platform', platform.id, router, searchParams, pathname)
+                  }
                   data-default-value={platform.id}
                 >
                   {platform.name}

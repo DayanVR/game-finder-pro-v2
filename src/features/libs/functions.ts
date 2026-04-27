@@ -4,7 +4,8 @@ export const updateURLParam = (
   key: string,
   value: string,
   router: AppRouterInstance,
-  searchParams: URLSearchParams
+  searchParams: URLSearchParams,
+  pathname: string
 ) => {
   const params = new URLSearchParams(searchParams.toString());
   const currentValue = params.get(key);
@@ -16,7 +17,16 @@ export const updateURLParam = (
   } else {
     params.delete(key);
   }
-  router.push(`?${params.toString()}`);
+
+  const query = params.toString();
+
+  const isGamePage = pathname !== '/';
+  
+  if (isGamePage) {
+    router.push(`/${query ? `?${query}` : ''}`);
+  } else {
+    router.push(`?${query}`);
+  }
 };
 
 export const handleDateChange = (releasedGameDate: string | undefined) => {
