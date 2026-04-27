@@ -4,7 +4,8 @@ export const updateURLParam = (
   key: string,
   value: string,
   router: AppRouterInstance,
-  searchParams: URLSearchParams
+  searchParams: URLSearchParams,
+  pathname: string
 ) => {
   const params = new URLSearchParams(searchParams.toString());
   const currentValue = params.get(key);
@@ -16,7 +17,16 @@ export const updateURLParam = (
   } else {
     params.delete(key);
   }
-  router.push(`?${params.toString()}`);
+
+  const query = params.toString();
+
+  const isGamePage = pathname !== '/';
+  
+  if (isGamePage) {
+    router.push(`/${query ? `?${query}` : ''}`);
+  } else {
+    router.push(`?${query}`);
+  }
 };
 
 export const handleDateChange = (releasedGameDate: string | undefined) => {
@@ -45,46 +55,3 @@ export const formattedDate = (timestamp: number | null | undefined) => {
     return `${month}/${day}/${year}`;
   }
 };
-
-// export const HandleOrderChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-//   const { setPage, setOffset, setSortBy, setGotyEditions } = useGameStore();
-//   setPage(1);
-//   setOffset(0);
-//   setSortBy(e.target.value);
-//   setGotyEditions(false);
-// };
-
-// export const handlePlatformChange = (platformId: string) => {
-//   const { setPlatformId, setPage, setOffset, setGotyEditions } = useGameStore.getState();
-//   setPage(1);
-//   setOffset(0);
-//   setPlatformId(platformId);
-//   setGotyEditions(false);
-// };
-
-// export const handleDateChange = (dateValue: string) => {
-//   const { setReleasedGameDate, setPage, setOffset, setGotyEditions } = useGameStore.getState();
-//   setPage(1);
-//   setOffset(0);
-//   setReleasedGameDate(dateValue);
-//   setGotyEditions(false);
-// };
-
-// export const useHandleTopChange = () => {
-//   const router = useRouter();
-
-//   return (topValue: string) => {
-//     const { setSortBy, setPage, setOffset, setGotyEditions } = useGameStore.getState();
-
-//     setPage(1);
-//     setOffset(0);
-//     setSortBy(topValue);
-
-//     if (topValue === 'goty') {
-//       setGotyEditions(true);
-//       router.push('?goty');
-//     } else {
-//       setGotyEditions(false);
-//     }
-//   };
-// };

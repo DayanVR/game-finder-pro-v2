@@ -10,7 +10,7 @@ export default function InfoCall() {
       {infoList.map((info) => (
         <div
           key={info.text}
-          className="flex flex-1 flex-col items-center rounded-xl border border-white/10 bg-(--color-bg-secondary)/60 p-3 shadow-lg shadow-[#8b5cf6]/20"
+          className="flex flex-1 flex-col items-center rounded-xl border border-white/10 bg-(--color-bg-secondary)/60 p-3 shadow-lg shadow-[#e7000b]/20"
         >
           <span className="text-3xl font-bold text-white">{info.data}</span>
           <span className="text-lg text-white/70">{info.text}</span>

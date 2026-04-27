@@ -1,5 +1,4 @@
 'use client';
-
 import SearchGlass from '@/svg/SearchGlass';
 import { useEffect } from 'react';
 import useHandleFormSubmit from '@/features/games/hooks/handleFormSubmit';
@@ -13,23 +12,7 @@ export default function SearchForm() {
   const setSearchInput = useGameStore((state) => state.setSearchInput);
 
   const queryInput = searchParams.get('searchInput') || '';
-
-  //  const searchParams = useSearchParams();
-  //  const pathname = usePathname();
-  //  const { replace } = useRouter();
-
-  //  const handleSearch = useDebouncedCallback((value) => {
-  //    const params = new URLSearchParams(searchParams);
-  //    params.set('page', '1');
-  //    if (value) {
-  //      params.set('query', value);
-  //    } else {
-  //      params.delete('query');
-  //    }
-  //    replace(`${pathname}?${params.toString()}`);
-  //  }, 300);
   
-
   useEffect(() => {
     setSearchInput(queryInput);
   }, [searchParams, queryInput]);
@@ -56,7 +39,7 @@ export default function SearchForm() {
       </div>
       <button
         type="submit"
-        className="cursor-pointer rounded-r-full border-y border-r border-(--color-accent-primary) bg-(--color-accent-primary) px-8 py-3 text-lg font-bold text-white transition-all hover:bg-(--color-accent-primary)/70 hover:shadow-[0_0_15px_rgba(139,92,246,0.5)] max-md:hidden"
+        className="cursor-pointer rounded-r-full border-y border-r border-(--color-accent-primary) bg-(--color-accent-primary) px-8 py-3 text-lg font-bold text-white transition-all hover:bg-(--color-accent-primary)/70 hover:shadow-[0_0_25px_#e7000b] max-md:hidden"
       >
         Search
       </button>

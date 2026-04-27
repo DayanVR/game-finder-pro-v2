@@ -45,7 +45,7 @@ export default function GameCard({ game }: { game: IGDBGameListItem }) {
   return (
     <Link
       href={`/${game.slug}`}
-      className="group relative mx-auto h-[420px] w-[280px] cursor-pointer overflow-hidden rounded-2xl border border-white/5 bg-(--color-bg-secondary) shadow-xl backdrop-blur-md transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_0_25px_rgba(139,92,246,0.3)]"
+      className="group relative mx-auto h-[420px] w-[280px] cursor-pointer overflow-hidden rounded-2xl border border-white/5 bg-(--color-bg-secondary) shadow-xl backdrop-blur-md transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_0_30px_#e7000b]"
     >
       <div className="relative h-60 w-full overflow-hidden">
         <Image
@@ -53,7 +53,7 @@ export default function GameCard({ game }: { game: IGDBGameListItem }) {
             normalizeImage(game.cover?.url.replace('t_thumb', 't_cover_big')) ??
             '/img-not-found.jpg'
           }
-          className="aspect-square h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+          className="aspect-square h-full w-full object-fill transition-transform duration-700 group-hover:scale-105"
           alt={game.name}
           width={100}
           height={100}
