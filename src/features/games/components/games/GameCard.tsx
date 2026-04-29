@@ -84,16 +84,16 @@ export default function GameCard({ game }: { game: IGDBGameListItem }) {
             </span>
           </div>
 
-          <h1 className="group-hover:text-primary mt-3 line-clamp-2 text-xl font-bold text-white transition-colors">
+          <h1 className="group-hover:text-primary mt-3 line-clamp-2 text-xl lg:text-2xl text-pretty font-bold text-white transition-colors">
             {game?.name}
           </h1>
         </div>
 
-        <div className="text-md flex items-center justify-between border-t border-white/10 pt-3 font-medium text-gray-400">
+        <div className="text-base xl:text-lg flex items-center justify-between border-t border-white/10 pt-3 font-medium text-gray-400">
           <span className="flex items-center">
-            <span className="mr-1 font-semibold text-(--color-accent-primary)">
+            <span className="mr-1.5 font-semibold text-(--color-accent-primary)">
               {game?.rating_count}
-            </span>{' '}
+            </span>
             Votes
           </span>
           <span>{formatDate}</span>

@@ -39,14 +39,16 @@ export default async function VideoGamesList({
   return (
     <>
       <div className="grid grid-flow-row grid-cols-1 gap-8 px-4 text-white min-[1700px]:grid-cols-4 min-[2560px]:grid-cols-6 md:grid-cols-2 xl:grid-cols-3">
-        {data?.map((game: IGDBGameListItem) => (
-          <GameCard key={game.id} game={game} />
-        ))}
+        {data?.length > 0 ? (
+          data?.map((game: IGDBGameListItem) => <GameCard key={game.id} game={game} />)
+        ) : (
+          <h2 className="col-span-full text-center text-4xl lg:text-5xl text-white">No games found.</h2>
+        )}
         {data?.length === 0 && (
           <>
             {topGames && releasedGameDate && (
               <div className="col-span-full text-center text-xl text-white">
-                No games found.
+                <h2>No games found.</h2>
                 <div className="my-6 flex items-center justify-center text-2xl text-red-500">
                   Please select either &quot;Top Games&quot; or &quot;New Releases&quot; filter, not
                   both.
@@ -61,7 +63,7 @@ export default async function VideoGamesList({
           </>
         )}
       </div>
-      {data && <PaginationComponent totalPages={totalPages} />}
+      {data?.length !== 0 && <PaginationComponent totalPages={totalPages} />}
     </>
   );
 }
