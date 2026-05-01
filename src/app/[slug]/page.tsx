@@ -12,28 +12,14 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const gameDetails = await fetchGameDetails(slug);
 
-  const { Star, Calendar, Controller, Desktop, Developer, Gallery, People, Suitcase } =
-    detailsIcons;
-  const {
-    platforms,
-    game_modes,
-    first_release_date,
-    involved_companies,
-    player_perspectives,
-    genres,
-    summary,
-    storyline,
-    videos,
-    screenshots,
-    themes,
-    rating,
-    rating_count,
-  } = gameDetails as IGDBGame;
+  const { Star, Calendar, Controller, People } = detailsIcons;
+  const { game_modes, player_perspectives, genres, themes, rating, rating_count } =
+    gameDetails as IGDBGame;
 
   const formatDate = formattedDate(gameDetails?.first_release_date);
 
   const ratingComponent = rating ? (
-    <div className="flex items-center gap-4">
+    <div className="flex flex-wrap items-center gap-4">
       <div className="flex w-fit items-center gap-x-2 rounded-full bg-(--color-accent-primary)/20 px-4 py-2">
         <Star className="size-5 fill-(--color-accent-primary)" />
         <span className="text-2xl font-semibold text-(--color-accent-primary)">
@@ -51,7 +37,7 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
 
   return (
     <>
-      <div className="flex h-full w-full items-center justify-between">
+      <div className="flex items-center justify-between">
         <NavigateBack />
         <button
           type="button"
@@ -65,11 +51,8 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
         </button>
       </div>
 
-      {/* <div className="from-primary/10 via-background to-background absolute inset-0 bg-gradient-to-b" />
-      <div className="from-primary/20 absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] via-transparent to-transparent" /> */}
-
-      <section className="relative flex gap-8">
-        <div className="my-3 w-full max-w-[300px] justify-self-center lg:my-8">
+      <section className="relative flex gap-8 max-md:flex-col">
+        <div className="my-3 w-full justify-self-center sm:max-w-[300px] lg:my-8">
           {gameDetails && (
             <div className="group relative aspect-3/4 overflow-hidden rounded-2xl border border-black/50 shadow-2xl shadow-[#e7000b]/30 transition-transform duration-300 hover:scale-[1.02]">
               <Image
@@ -88,11 +71,11 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
         </div>
 
         <div className="flex flex-col justify-center gap-y-4">
-          <h1 className="text-4xl font-semibold text-balance md:text-5xl lg:w-6/12 xl:w-7/12 xl:text-6xl 2xl:w-full">
+          <h1 className="text-3xl font-semibold text-balance md:text-4xl xl:text-6xl">
             {gameDetails ? gameDetails.name : 'Game not found'}
           </h1>
           {ratingComponent}
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-x-4 gap-y-2">
             {formatDate && (
               <p className="flex items-center gap-2 text-sm text-white/70">
                 <Calendar className="size-4 text-(--color-accent-primary)" />
@@ -132,7 +115,7 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
         </div>
       </section>
 
-      <section>{gameDetails && <GameInfo gameDetails={gameDetails} />}</section>
+      <section className="">{gameDetails && <GameInfo gameDetails={gameDetails} />}</section>
     </>
   );
 }

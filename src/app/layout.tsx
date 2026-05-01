@@ -19,15 +19,15 @@ export default function RootLayout({
   return (
     <html lang="en" className="bg-(--color-bg-secondary)">
       <body suppressHydrationWarning className="flex justify-center">
-        <div className="flex min-h-screen w-full max-w-[1536px]">
+        <div className="flex min-h-screen max-w-[1536px]">
           <div className="sticky top-0 h-screen shrink-0 max-lg:hidden">
             <SidePanel />
           </div>
-          <div className="w-full flex-1 pt-4 lg:pt-8">
+          <div className="max-w-full flex-1 pt-4 lg:pt-8">
             <IntroCall />
             <Header />
             <InfoCall />
-            <main className="py-6 sm:px-6 xl:px-8 xl:py-10 2xl:px-12">{children}</main>
+            <main className="py-6 sm:px-6 xl:px-8 xl:py-10 2xl:px-10">{children}</main>
             <Footer />
           </div>
         </div>

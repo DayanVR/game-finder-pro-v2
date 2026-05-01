@@ -2,36 +2,21 @@
 import { IGDBGame } from '@/features/libs/types';
 import { useState } from 'react';
 import ImageGallery from './ImageGallery';
-import { formattedDate } from '@/features/libs/functions';
 import { detailsIcons } from '@/features/shared/gameDetailsIcons';
 
 export default function GameInfo({ gameDetails }: { gameDetails: IGDBGame }) {
   const [gameInfo, setGameInfo] = useState<string | undefined>('summary');
-  const {
-    platforms,
-    game_modes,
-    first_release_date,
-    involved_companies,
-    player_perspectives,
-    genres,
-    summary,
-    storyline,
-    videos,
-    screenshots,
-    themes,
-  } = gameDetails;
-  const {Desktop, Developer, Suitcase } =
-    detailsIcons;
+  const { platforms, involved_companies, summary, storyline, videos, screenshots } = gameDetails;
+  const { Desktop, Developer, Suitcase } = detailsIcons;
 
   const developerCompany = involved_companies?.find((company) => company.developer);
   const publisherCompany = involved_companies?.find((company) => company.publisher);
 
-  const formatDate = formattedDate(gameDetails?.first_release_date);
   const videoUrl = `https://www.youtube.com/embed/${videos?.[0]?.video_id}`;
 
   return (
     <>
-      <div className="grid grid-cols-3 grid-rows-[1fr_1fr_0.5fr] gap-8">
+      <div className="grid grid-rows-[1fr_1fr_0.5fr] gap-4 xl:grid-cols-3 xl:gap-8">
         <div className="col-span-2 mx-auto max-h-96 min-h-64 w-full rounded-2xl border border-white/10 bg-(--color-bg-secondary) py-3 xl:py-4">
           <div className="flex justify-around pb-6 sm:justify-center md:space-x-8 lg:pt-4 xl:pt-6">
             {summary && (
@@ -67,44 +52,48 @@ export default function GameInfo({ gameDetails }: { gameDetails: IGDBGame }) {
             <p className="line-clamp-4 text-white/70 xl:mx-7 2xl:text-xl">{storyline}</p>
           )}
         </div>
-        <div className="col-span-1 flex flex-col justify-center gap-4 rounded-2xl border border-white/10 bg-(--color-bg-secondary) px-6">
-          <div className="flex items-center gap-4">
-            <div className="rounded-lg bg-(--color-accent-primary)/20 p-3">
-              <Developer className="size-4 text-(--color-accent-secondary)" />
+
+        <div className="flex flex-col gap-4 max-xl:col-span-2 xl:col-span-1 xl:row-span-2">
+          <div className="flex flex-col justify-center gap-4 rounded-2xl border border-white/10 bg-(--color-bg-secondary) px-6 py-10">
+            <div className="flex items-center gap-4">
+              <div className="rounded-lg bg-(--color-accent-primary)/20 p-3">
+                <Developer className="size-4 text-(--color-accent-secondary)" />
+              </div>
+              <div>
+                <h3 className="text-white/60">DEVELOPER</h3>
+                <span className="font-bold">{developerCompany?.company.name}</span>
+              </div>
             </div>
-            <div>
-              <h3 className="text-white/60">DEVELOPER</h3>
-              <span className="font-bold">{developerCompany?.company.name}</span>
+            <div className="flex items-center gap-4">
+              <div className="rounded-lg bg-(--chart-5)/10 p-3">
+                <Suitcase className="size-4 text-(--chart-5)" />
+              </div>
+              <div>
+                <h3 className="text-white/60">PUBLISHER</h3>
+                <span className="font-bold">{publisherCompany?.company.name}</span>
+              </div>
             </div>
           </div>
-          <div className="flex items-center gap-4">
-            <div className="rounded-lg bg-(--chart-5)/10 p-3">
-              <Suitcase className="size-4 text-(--chart-5)" />
+
+          <div className="flex flex-col justify-center gap-4 rounded-2xl border border-white/10 bg-(--color-bg-secondary) px-6 py-10">
+            <div className="flex items-center gap-4">
+              <div className="rounded-lg bg-(--color-accent-primary)/20 p-3">
+                <Desktop className="size-4 text-(--color-accent-secondary)" />
+              </div>
+              <div className="">
+                <h3 className="text-white/60">AVAILABLE PLATFORMS</h3>
+              </div>
             </div>
-            <div>
-              <h3 className="text-white/60">PUBLISHER</h3>
-              <span className="font-bold">{publisherCompany?.company.name}</span>
+            <div className="flex flex-wrap gap-x-4 gap-y-2.5">
+              {platforms?.map((platform) => (
+                <span className="rounded-full bg-white/5 px-2 py-1 text-sm" key={platform.id}>
+                  {platform.name}
+                </span>
+              ))}
             </div>
           </div>
         </div>
 
-        <div className="col-span-1 row-span-1 flex flex-col justify-center gap-4 rounded-2xl border border-white/10 bg-(--color-bg-secondary) px-6">
-          <div className="flex items-center gap-4">
-            <div className="rounded-lg bg-(--color-accent-primary)/20 p-3">
-              <Desktop className="size-4 text-(--color-accent-secondary)" />
-            </div>
-            <div className="">
-              <h3 className="text-white/60">AVAILABLE PLATFORMS</h3>
-            </div>
-          </div>
-          <div className="flex flex-wrap gap-x-4 gap-y-2.5">
-            {platforms?.map((platform) => (
-              <span className="rounded-full bg-white/5 px-2 py-1 text-sm" key={platform.id}>
-                {platform.name}
-              </span>
-            ))}
-          </div>
-        </div>
         <div className="col-span-2 row-span-3 row-start-2 h-fit overflow-hidden rounded-2xl border border-white/10 bg-(--color-bg-secondary)">
           {videos && (
             <div className="space-y-4 py-4 lg:space-y-4 lg:pt-10 lg:pb-8">
