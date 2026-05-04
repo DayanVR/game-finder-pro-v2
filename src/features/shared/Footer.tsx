@@ -3,7 +3,7 @@ import Controller from '../svg/detailsPage/Controller';
 
 export default function Footer() {
   return (
-    <footer className="mt-10 border-t border-white/10 bg-(--color-bg-secondary)">
+    <footer className="mt-10 border-t border-r border-white/10 bg-(--color-bg-secondary)">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
           <div className="md:col-span-1">

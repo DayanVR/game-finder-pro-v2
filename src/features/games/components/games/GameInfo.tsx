@@ -17,7 +17,7 @@ export default function GameInfo({ gameDetails }: { gameDetails: IGDBGame }) {
   return (
     <>
       <div className="grid grid-rows-[1fr_1fr_0.5fr] gap-4 xl:grid-cols-3 xl:gap-8">
-        <div className="col-span-2 mx-auto max-h-96 min-h-64 w-full rounded-2xl border border-white/10 bg-(--color-bg-secondary) py-3 xl:py-4">
+        <div className="col-span-2 min-h-52 w-full rounded-2xl border border-white/10 bg-(--color-bg-secondary) py-3 xl:max-h-96 xl:py-4">
           <div className="flex justify-around pb-6 sm:justify-center md:space-x-8 lg:pt-4 xl:pt-6">
             {summary && (
               <>
@@ -46,14 +46,18 @@ export default function GameInfo({ gameDetails }: { gameDetails: IGDBGame }) {
             )}
           </div>
           {gameInfo === 'summary' && (
-            <p className="line-clamp-4 text-white/70 xl:mx-7 2xl:text-xl">{summary}</p>
+            <p className="mx-5 line-clamp-none text-pretty text-white/70 xl:mx-7 xl:line-clamp-6 2xl:text-xl">
+              {summary}
+            </p>
           )}
           {gameInfo === 'storyline' && (
-            <p className="line-clamp-4 text-white/70 xl:mx-7 2xl:text-xl">{storyline}</p>
+            <p className="mx-5 line-clamp-none text-pretty text-white/70 xl:mx-7 xl:line-clamp-6 2xl:text-xl">
+              {storyline}
+            </p>
           )}
         </div>
 
-        <div className="flex flex-col gap-4 max-xl:col-span-2 xl:col-span-1 xl:row-span-2">
+        <div className="flex flex-col gap-4 max-xl:col-span-2 xl:col-span-1 xl:row-span-2 2xl:[&_span]:text-lg 2xl:[&_h3]:text-xl">
           <div className="flex flex-col justify-center gap-4 rounded-2xl border border-white/10 bg-(--color-bg-secondary) px-6 py-10">
             <div className="flex items-center gap-4">
               <div className="rounded-lg bg-(--color-accent-primary)/20 p-3">
@@ -80,13 +84,13 @@ export default function GameInfo({ gameDetails }: { gameDetails: IGDBGame }) {
               <div className="rounded-lg bg-(--color-accent-primary)/20 p-3">
                 <Desktop className="size-4 text-(--color-accent-secondary)" />
               </div>
-              <div className="">
+              <div>
                 <h3 className="text-white/60">AVAILABLE PLATFORMS</h3>
               </div>
             </div>
             <div className="flex flex-wrap gap-x-4 gap-y-2.5">
               {platforms?.map((platform) => (
-                <span className="rounded-full bg-white/5 px-2 py-1 text-sm" key={platform.id}>
+                <span className="rounded-full bg-white/5 px-2 lg:px-3 lg:py-1.5 py-1 text-sm" key={platform.id}>
                   {platform.name}
                 </span>
               ))}

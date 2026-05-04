@@ -31,7 +31,6 @@ export default async function VideoGamesList({
   });
 
   if (!result) {
-    console.error('Failed to fetch game list');
     return;
   }
 
@@ -42,7 +41,9 @@ export default async function VideoGamesList({
         {data?.length > 0 ? (
           data?.map((game: IGDBGameListItem) => <GameCard key={game.id} game={game} />)
         ) : (
-          <h2 className="col-span-full text-center text-4xl lg:text-5xl text-white">No games found.</h2>
+          <h2 className="col-span-full text-center text-4xl text-white lg:text-5xl">
+            No games found.
+          </h2>
         )}
         {data?.length === 0 && (
           <>
