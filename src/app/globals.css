@@ -3,6 +3,7 @@
 @source '../../.flowbite-react/class-list.json';
 
 :root {
+  scrollbar-gutter: stable;
   --color-bg-primary: #010203;
   --color-bg-secondary: #000406;
   --color-accent-primary: #e85854;
@@ -45,15 +46,10 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0); */
 }
-
 body {
   background: linear-gradient(to bottom, rgba(255, 0, 0, 0.1), #010203 10%);
   color: var(--color-text-primary);
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
-}
-
-::-webkit-scrollbar {
-  width: 8px;
 }
 
 section {
