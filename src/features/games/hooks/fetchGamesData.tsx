@@ -62,7 +62,7 @@ export const fetchGameList = async ({
     const sort = topGames === 'top-50' ? 'rating_count desc' : sortOption;
 
     const [gamesRes, countRes] = await Promise.all([
-      fetch('http://localhost:3001/api/games', {
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/games`, {
         method: 'POST',
         headers: {
           'Client-ID': process.env.NEXT_PUBLIC_CLIENT_ID!,
@@ -128,7 +128,7 @@ export const fetchGameDetails = async (slug: string) => {
               platforms.platform_family.*
             `;
   try {
-    const response = await fetch(`http://localhost:3001/api/details`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/details`, {
       method: 'POST',
       headers: {
         'Client-ID': `${process.env.NEXT_PUBLIC_CLIENT_ID}`,
