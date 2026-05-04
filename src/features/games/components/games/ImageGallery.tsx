@@ -18,7 +18,7 @@ export default function ImageGallery({ images }: { images: string[] }) {
           GAME <span className="text-white">CAPTURES</span>
         </h2>
       </div>
-      {/* <Gallery images={screenshotsList} /> */}
+      <Gallery images={screenshotsList} />
       <div className="custom-pagination mx-auto mt-4 w-fit text-center text-xl"></div>
     </div>
   );

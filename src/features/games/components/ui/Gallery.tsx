@@ -20,22 +20,22 @@ export default function Gallery({ images }: { images: string[] }) {
       breakpoints={{
         0: { slidesPerView: 1 },
         768: { slidesPerView: 2 },
-        1024: { slidesPerView: 3 },
+        1440: { slidesPerView: 3 },
       }}
-      className="h-56 sm:h-64 lg:h-80"
+      className="h-56 w-xs max-w-full overflow-hidden sm:h-64 md:w-xl lg:h-80 xl:w-3xl 2xl:w-5xl"
     >
       {images.map((img, i) => (
         <SwiperSlide key={i}>
           <div
             key={i}
-            className="relative size-full overflow-hidden transition duration-200 hover:scale-[1.03]"
+            className="relative h-full w-fit overflow-hidden transition duration-200 hover:scale-[1.03]"
           >
             <Image
               src={img}
               alt="Game Screenshot"
-              width={690}
-              height={700}
-              className="aspect-auto h-full w-full rounded-xl object-fill"
+              width={720}
+              height={720}
+              className="aspect-auto h-full w-full rounded-xl"
             />
           </div>
           {/* <div className="overflow-hidden rounded-xl border border-gray-800 bg-black">
