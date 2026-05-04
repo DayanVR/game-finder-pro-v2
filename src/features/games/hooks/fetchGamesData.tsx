@@ -47,6 +47,8 @@ export const fetchGameList = async ({
       .filter(Boolean)
       .join(' & ');
 
+    const whereWithSearch = [whereFilters, q ? `name ~ *"${q}"*` : ''].filter(Boolean).join(' & ');
+
     const sortOption =
       sortBy === 'order-asc'
         ? 'rating asc'
@@ -58,23 +60,6 @@ export const fetchGameList = async ({
               ? 'rating desc'
               : undefined;
     const sort = topGames === 'top-50' ? 'rating_count desc' : sortOption;
-
-    // const response = await fetch('http://localhost:3001/api/games', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Client-ID': process.env.NEXT_PUBLIC_CLIENT_ID!,
-    //     Authorization: process.env.NEXT_PUBLIC_AUTH_TOKEN!,
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({
-    //     fields: searchFields,
-    //     search: q,
-    //     where: whereFilters,
-    //     sort: sort || 'rating_count desc',
-    //     limit,
-    //     offset: offset || 0,
-    //   }),
-    // });
 
     const [gamesRes, countRes] = await Promise.all([
       fetch('http://localhost:3001/api/games', {
@@ -101,7 +86,7 @@ export const fetchGameList = async ({
           Authorization: process.env.NEXT_PUBLIC_AUTH_TOKEN!,
           'Content-Type': 'text/plain',
         },
-        body: `where ${whereFilters};`,
+        body: `where ${whereWithSearch};`,
       }),
     ]);
 
@@ -111,9 +96,6 @@ export const fetchGameList = async ({
     const data: IGDBGameListItem[] = await gamesRes.json();
     const { count } = await countRes.json();
 
-    // if (!response.ok) throw new Error(`HTTP error ${response.status}`);
-
-    // const data: IGDBGameListItem[] = await response.json();
     return {
       data,
       totalPages: Math.ceil(count / limit),
