@@ -1,6 +1,6 @@
 export default function IntroCall() {
   return (
-    <div className="mx-10 mt-8 flex flex-col items-center gap-y-6 text-center">
+    <div className="mx-12 mt-8 flex flex-col items-center gap-y-6 text-center">
       <h1 className="text-3xl font-bold xl:text-5xl">
         Discover Your Next{' '}
         <span className="text-3xl font-bold text-(--color-accent-secondary) xl:text-5xl">

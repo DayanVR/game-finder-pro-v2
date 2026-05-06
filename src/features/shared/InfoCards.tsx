@@ -6,7 +6,7 @@ export default function InfoCall() {
     { text: 'Updated', data: 'Daily' },
   ];
   return (
-    <div className="mx-auto mt-8 flex flex-wrap max-w-11/12 items-center justify-evenly gap-6 text-center">
+    <div className="mx-auto px-10 sm:px-0 mt-8 flex flex-wrap max-w-11/12 items-center justify-evenly gap-6 text-center">
       {infoList.map((info) => (
         <div
           key={info.text}

@@ -1,12 +1,12 @@
 import { fetchGameDetails } from '@/features/games/hooks/fetchGamesData';
 import { NavigateBack } from '@/features/games/components/navigateBack';
-import { Plus } from '@/features/shared/gamerLibrary/addPlus';
 import Image from 'next/image';
 import { normalizeImage } from '@/features/libs/normalizeImage';
 import GameInfo from '@/features/games/components/games/GameInfo';
-import { IGDBGame } from '../../features/libs/types';
+import { IGDBGame, SavedGame } from '@/features/libs/types';
 import { formattedDate } from '@/features/libs/functions';
 import { detailsIcons } from '@/shared/gameDetailsIcons';
+import AddToLibraryButton from '@/features/games/components/ui/AddToLibraryButton';
 
 export default async function GamePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -27,28 +27,19 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
         </span>
         <span className="text-lg text-white/80"> / 100</span>
       </div>
-      <span className="text-sm xl:text-base 2xl:text-lg text-white/80">
+      <span className="text-sm text-white/80 xl:text-base 2xl:text-lg">
         Based on {rating_count?.toLocaleString()} ratings
       </span>
     </div>
   ) : (
-    <span className="text-sm xl:text-base 2xl:text-lg text-white/70">N/A</span>
+    <span className="text-sm text-white/70 xl:text-base 2xl:text-lg">N/A</span>
   );
 
   return (
     <>
-      <div className="flex mx-4 sm:mx-2 items-center justify-between">
+      <div className="mx-4 flex items-center justify-between sm:mx-2">
         <NavigateBack />
-        <button
-          type="button"
-          //   onClick={handleAddToLibrary}
-          className="group flex cursor-pointer items-center gap-x-3 rounded-full border border-(--color-accent-primary)/50 bg-(--color-accent-primary)/20 px-6 py-3 backdrop-blur-md transition-all duration-300 hover:scale-105 hover:bg-(--color-accent-primary)/30 hover:shadow-[0_0_15px_#e7000b]"
-        >
-          <Plus className="size-4 sm:size-6 fill-(--color-accent-primary) transition-transform group-hover:scale-105" />
-          <span className="text-base md:text-lg font-semibold text-white transition-colors xl:text-xl">
-            Add to Library
-          </span>
-        </button>
+        <AddToLibraryButton game={gameDetails as SavedGame} />
       </div>
 
       <section className="relative flex gap-8 max-md:flex-col">
@@ -77,13 +68,13 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
           {ratingComponent}
           <div className="flex flex-wrap gap-x-4 gap-y-2">
             {formatDate && (
-              <p className="flex items-center gap-2 text-sm xl:text-base 2xl:text-lg text-white/70">
+              <p className="flex items-center gap-2 text-sm text-white/70 xl:text-base 2xl:text-lg">
                 <Calendar className="size-4 text-(--color-accent-primary)" />
                 {formatDate}
               </p>
             )}
             {player_perspectives && (
-              <p className="flex items-center gap-2 text-sm xl:text-base 2xl:text-lg text-white/70">
+              <p className="flex items-center gap-2 text-sm text-white/70 xl:text-base 2xl:text-lg">
                 <Controller className="size-6 text-(--color-accent-primary)" />
                 {player_perspectives
                   ?.map((player_perspective) => player_perspective.name)
@@ -91,13 +82,13 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
               </p>
             )}
             {game_modes && (
-              <p className="flex items-center gap-2 text-sm xl:text-base 2xl:text-lg text-balance text-white/70">
+              <p className="flex items-center gap-2 text-sm text-balance text-white/70 xl:text-base 2xl:text-lg">
                 <People className="size-6 text-(--color-accent-primary)" />
                 {game_modes?.map((game_mode) => game_mode.name).join(', ')}
               </p>
             )}
           </div>
-          <div className="flex gap-3 text-sm xl:text-base 2xl:text-lg text-(--color-accent-primary)">
+          <div className="flex gap-3 text-sm text-(--color-accent-primary) xl:text-base 2xl:text-lg">
             {genres?.map((genre) => (
               <p
                 className="py-.5 rounded-full border border-(--color-accent-secondary)/40 bg-(--color-accent-secondary)/10 px-2 font-bold"
