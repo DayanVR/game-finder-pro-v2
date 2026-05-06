@@ -13,6 +13,7 @@ import { sidebarIcons } from './sidebarIcons';
 import { updateURLParam } from '../libs/functions';
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import { Gamepad } from '../svg/Gamepad';
+import Link from 'next/link';
 
 export default function SidePanel() {
   const {
@@ -92,13 +93,15 @@ export default function SidePanel() {
 
         <SidebarItems>
           <SidebarItemGroup>
-            <SidebarItem
-              href="/"
-              icon={Home}
-              className="text-2xl transition-colors duration-150 hover:cursor-pointer"
-            >
-              Home
-            </SidebarItem>
+            <Link href="/">
+              <SidebarItem
+                href="/"
+                icon={Home}
+                className="text-2xl transition-colors duration-150 hover:cursor-pointer"
+              >
+                Home
+              </SidebarItem>
+            </Link>
 
             <SidebarCollapse label="New Releases" icon={CirclePlus}>
               <SidebarItem

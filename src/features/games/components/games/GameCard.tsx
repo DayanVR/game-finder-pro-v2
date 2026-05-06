@@ -1,14 +1,14 @@
-import { IGDBGameListItem } from '@/features/libs/types';
 import Link from 'next/link';
-import { useMemo } from 'react';
-import { sidebarIcons } from '@/features/shared/sidebarIcons';
 import Image from 'next/image';
+import { useMemo } from 'react';
+import { IGDBGameListItem } from '@/features/libs/types';
+import { sidebarIcons } from '@/features/shared/sidebarIcons';
 import { normalizeImage } from '@/features/libs/normalizeImage';
 import { formattedDate } from '@/features/libs/functions';
 
 export default function GameCard({ game }: { game: IGDBGameListItem }) {
   const { Windows, PlayStation, Xbox, Android, IOS, Nintendo } = sidebarIcons;
-
+console.log(game)
   const platformIcons = useMemo(() => {
     if (!game.platforms) return [];
 

@@ -88,5 +88,5 @@ export interface IGDBGameListItem {
 }
 export type SavedGame = Pick<
   IGDBGameListItem,
-  'id' | 'slug' | 'name' | 'cover' | 'rating' | 'rating_count'
+  'id' | 'slug' | 'name' | 'cover' | 'rating' | 'rating_count' | 'platforms'
 >;

@@ -11,7 +11,7 @@ export default function GamerLibraryPage() {
   useEffect(() => {
     loadGames();
   }, [loadGames]);
-
+console.log(savedGames.length);
   return (
     <>
       <div className="flex h-full w-full items-center justify-between px-3 sm:px-2">

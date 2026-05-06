@@ -15,7 +15,7 @@ export type StoreGame = {
   clearGames: () => void;
 };
 
-const useGameStore = create<StoreGame>((set, get) => ({
+const useGameStore = create<StoreGame>((set) => ({
   searchInput: '',
   setSearchInput: (input) => set({ searchInput: input }),
   UITitle: 'All Platforms',
@@ -51,14 +51,17 @@ const useGameStore = create<StoreGame>((set, get) => ({
   },
 
   toggleGame: (game) => {
-    const { savedGames } = get();
+    set((state) => {
+      const exists = state.savedGames.some((g) => g.id === game.id);
 
-    const exists = savedGames.some((g) => g.id === game.id);
+      const updated = exists
+        ? state.savedGames.filter((g) => g.id !== game.id)
+        : [...state.savedGames, game];
 
-    const updated = exists ? savedGames.filter((g) => g.id !== game.id) : [...savedGames, game];
-    localStorage.setItem('savedGames', JSON.stringify(updated));
+      localStorage.setItem('savedGames', JSON.stringify(updated));
 
-    set({ savedGames: updated });
+      return { savedGames: updated };
+    });
   },
 }));
 

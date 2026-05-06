@@ -17,6 +17,7 @@ export default function AddToLibraryButton({ game }: { game: IGDBGameListItem })
     cover: game.cover,
     rating: game.rating,
     rating_count: game.rating_count,
+    platforms: game.platforms,
   });
 
   return (
