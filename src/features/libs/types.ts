@@ -86,3 +86,7 @@ export interface IGDBGameListItem {
   genres?: IGDBNamedEntity[];
   platforms?: IGDBPlatform[];
 }
+export type SavedGame = Pick<
+  IGDBGameListItem,
+  'id' | 'slug' | 'name' | 'cover' | 'rating' | 'rating_count'
+>;

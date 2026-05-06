@@ -1,57 +1,65 @@
 import { create } from 'zustand';
+import { IGDBGameListItem, SavedGame } from '@/features/libs/types';
 
 export type StoreGame = {
   searchInput: string;
   setSearchInput: (input: string) => void;
-  limit: number;
-  setLimit: (limit: number) => void;
-  offset: number;
-  setOffset: (offset: number) => void;
-  sort: string;
-  setSort: (sort: string) => void;
-  gotyEditions: boolean;
-  setGotyEditions: (goty: boolean) => void;
-  platformId: string;
-  setPlatformId: (platformId: string) => void;
-  releasedGameDate: string;
-  setReleasedGameDate: (date: string) => void;
-  orderBy: string;
-  setOrderBy: (orderBy: string) => void;
   UITitle: string;
   setUITitle: (title: string) => void;
-  loading: boolean;
-  setLoading: (loading: boolean) => void;
-  page: number;
-  setPage: (page: number) => void;
-  sortBy: string;
-  setSortBy: (sortBy: string) => void;
+  savedGames: SavedGame[];
+
+  addGame: (game: IGDBGameListItem) => void;
+  removeGame: (id: number) => void;
+  loadGames: () => void;
+  toggleGame: (game: SavedGame) => void;
+  clearGames: () => void;
 };
 
-const useGameStore = create<StoreGame>((set) => ({
+const useGameStore = create<StoreGame>((set, get) => ({
   searchInput: '',
   setSearchInput: (input) => set({ searchInput: input }),
-  limit: 12,
-  setLimit: (limit) => set({ limit }),
-  offset: 0,
-  setOffset: (offset) => set({ offset }),
-  sort: '',
-  setSort: (sort) => set({ sort }),
-  gotyEditions: false,
-  setGotyEditions: (goty) => set({ gotyEditions: goty }),
-  platformId: '',
-  setPlatformId: (platformId) => set({ platformId }),
-  releasedGameDate: '',
-  setReleasedGameDate: (date) => set({ releasedGameDate: date }),
-  orderBy: '12',
-  setOrderBy: (orderBy) => set({ orderBy }),
-  sortBy: '',
-  setSortBy: (sortBy) => set({ sortBy }),
   UITitle: 'All Platforms',
   setUITitle: (title) => set({ UITitle: title }),
-  loading: false,
-  setLoading: (loading) => set({ loading }),
-  page: 1,
-  setPage: (page) => set({ page }),
+  savedGames: [],
+
+  addGame: (game) =>
+    set((state) => {
+      const exists = state.savedGames.find((g) => g.id === game.id);
+      if (exists) return state;
+
+      const updated = [...state.savedGames, game];
+      localStorage.setItem('savedGames', JSON.stringify(updated));
+      return { savedGames: updated };
+    }),
+
+  removeGame: (id) =>
+    set((state) => {
+      const updated = state.savedGames.filter((g) => g.id !== id);
+      localStorage.setItem('savedGames', JSON.stringify(updated));
+      return { savedGames: updated };
+    }),
+
+  loadGames: () => {
+    const data = localStorage.getItem('savedGames');
+    if (data) {
+      set({ savedGames: JSON.parse(data) });
+    }
+  },
+  clearGames: () => {
+    localStorage.removeItem('savedGames');
+    set({ savedGames: [] });
+  },
+
+  toggleGame: (game) => {
+    const { savedGames } = get();
+
+    const exists = savedGames.some((g) => g.id === game.id);
+
+    const updated = exists ? savedGames.filter((g) => g.id !== game.id) : [...savedGames, game];
+    localStorage.setItem('savedGames', JSON.stringify(updated));
+
+    set({ savedGames: updated });
+  },
 }));
 
 export default useGameStore;
