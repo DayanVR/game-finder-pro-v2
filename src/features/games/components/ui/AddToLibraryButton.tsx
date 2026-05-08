@@ -22,6 +22,7 @@ export default function AddToLibraryButton({ game }: { game: IGDBGameListItem })
 
   return (
     <button
+      type="button"
       onClick={(e) => {
         e.preventDefault();
         toggleGame(normalizeSavedGame(game));
