@@ -7,11 +7,11 @@ import GameCard from '@/features/games/components/games/GameCard';
 
 export default function GamerLibraryPage() {
   const { loadGames, clearGames, savedGames } = useGameStore();
-  
+
   useEffect(() => {
     loadGames();
   }, [loadGames]);
-console.log(savedGames.length);
+
   return (
     <>
       <div className="flex h-full w-full items-center justify-between px-3 sm:px-2">
