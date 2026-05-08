@@ -8,7 +8,6 @@ import { formattedDate } from '@/features/libs/functions';
 
 export default function GameCard({ game }: { game: IGDBGameListItem }) {
   const { Windows, PlayStation, Xbox, Android, IOS, Nintendo } = sidebarIcons;
-console.log(game)
   const platformIcons = useMemo(() => {
     if (!game.platforms) return [];
 
