@@ -34,13 +34,7 @@ export default async function Home({
 
   return (
     <section className="space-y-4 lg:space-y-8">
-      <FiltersUI
-        q={q}
-        sortBy={sortBy}
-        topGames={topGames}
-        releasedGameDate={gameDate}
-        platformId={platformID}
-      />
+      <FiltersUI q={q} topGames={topGames} releasedGameDate={gameDate} platformId={platformID} />
       <Suspense>
         <VideoGamesList
           q={q}
