@@ -5,6 +5,7 @@ import SidePanel from '@/shared/SidePanel';
 import IntroCall from '@/features/shared/IntroCall';
 import InfoCall from '@/features/shared/InfoCards';
 import Footer from '@/features/shared/Footer';
+import { Suspense } from 'react';
 
 export const metadata: Metadata = {
   title: 'Game Finder Pro',
@@ -21,7 +22,9 @@ export default function RootLayout({
       <body suppressHydrationWarning className="flex justify-center">
         <div className="flex max-w-[1536px]">
           <div className="sticky top-0 h-screen shrink-0 max-lg:hidden">
-            <SidePanel />
+            <Suspense>
+              <SidePanel />
+            </Suspense>
           </div>
           <div className="flex min-h-screen flex-col">
             <div className="max-w-full flex-1 pt-4 lg:pt-8">
