@@ -93,15 +93,14 @@ export default function SidePanel() {
 
         <SidebarItems>
           <SidebarItemGroup>
-            <Link href="/">
-              <SidebarItem
-                href="/"
-                icon={Home}
-                className="text-2xl transition-colors duration-150 hover:cursor-pointer"
-              >
-                Home
-              </SidebarItem>
-            </Link>
+            <SidebarItem
+              as={Link}
+              href="/"
+              icon={Home}
+              className="text-2xl transition-colors duration-150 hover:cursor-pointer"
+            >
+              Home
+            </SidebarItem>
 
             <SidebarCollapse label="New Releases" icon={CirclePlus}>
               <SidebarItem
