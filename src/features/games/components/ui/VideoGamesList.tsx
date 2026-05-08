@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { fetchGameList } from '../../hooks/fetchGamesData';
 import { IGDBGameListItem } from '@/features/libs/types';
 import GameCard from '../games/GameCard';
@@ -64,7 +65,11 @@ export default async function VideoGamesList({
           </>
         )}
       </div>
-      {data?.length !== 0 && <PaginationComponent totalPages={totalPages} />}
+      {data?.length !== 0 && (
+        <Suspense>
+          <PaginationComponent totalPages={totalPages} />
+        </Suspense>
+      )}
     </>
   );
 }
