@@ -1,7 +1,6 @@
 'use client';
 
 import { Pagination } from 'flowbite-react';
-import { useState } from 'react';
 import type { PaginationProps } from 'flowbite-react';
 import { updateURLParam } from '../libs/functions';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
