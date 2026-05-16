@@ -24,7 +24,7 @@ const paginationTheme: PaginationProps['theme'] = {
       icon: 'h-5 w-5',
     },
     selector: {
-      base: 'w-12 !bg-(--color-bg-secondary) hover:!bg-white/15 py-2 leading-tight transition-colors',
+      base: 'sm:w-12 w-8 !bg-(--color-bg-secondary) hover:!bg-white/15 py-2 leading-tight transition-colors',
       active:
         '!bg-(--color-accent-primary)/90 text-primary-foreground hover:!bg-(--color-accent-primary)/90 hover:text-primary-foreground',
       disabled: 'cursor-not-allowed opacity-50',
