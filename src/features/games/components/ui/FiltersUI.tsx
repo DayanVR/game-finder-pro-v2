@@ -6,7 +6,6 @@ import { useEffect } from 'react';
 
 const FiltersUI = ({
   q,
-  sortBy,
   topGames,
   releasedGameDate,
   platformId,
@@ -51,8 +50,10 @@ const FiltersUI = ({
   }, [setUITitle, platformId, q, releasedGameDate, topGames]);
 
   return (
-    <div className="mt-2 mb-10 lg:mb-14 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-      <h1 className="text-2xl md:text-4xl text-center lg:text-left xl:text-5xl 2xl:text-6xl">{UITitle}</h1>
+    <div className="mt-2 mb-10 flex flex-col gap-4 lg:mb-14 lg:flex-row lg:items-center lg:justify-between">
+      <h1 className="text-center text-2xl md:text-4xl lg:text-left xl:text-5xl 2xl:text-6xl">
+        {UITitle}
+      </h1>
       <Selection searchGame={q && q.length > 0 ? true : false} />
     </div>
   );
