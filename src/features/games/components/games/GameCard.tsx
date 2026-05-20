@@ -6,7 +6,7 @@ import { sidebarIcons } from '@/features/shared/sidebarIcons';
 import { normalizeImage } from '@/features/libs/normalizeImage';
 import { formattedDate } from '@/features/libs/functions';
 
-export default function GameCard({ game }: { game: IGDBGameListItem }) {
+export default function GameCard({ game }: { game: IGDBGameListItem  }) {
   const { Windows, PlayStation, Xbox, Android, IOS, Nintendo } = sidebarIcons;
   const platformIcons = useMemo(() => {
     if (!game.platforms) return [];
@@ -40,7 +40,7 @@ export default function GameCard({ game }: { game: IGDBGameListItem }) {
         : 'bg-red-500/20 text-red-400';
 
   const formatDate = formattedDate(game?.first_release_date);
-
+  console.log(game.cover);
   return (
     <Link
       href={`/${game.slug}`}
@@ -83,12 +83,12 @@ export default function GameCard({ game }: { game: IGDBGameListItem }) {
             </span>
           </div>
 
-          <h1 className="group-hover:text-primary mt-3 line-clamp-2 text-xl lg:text-2xl text-pretty font-bold text-white transition-colors">
+          <h1 className="group-hover:text-primary mt-3 line-clamp-2 text-xl font-bold text-pretty text-white transition-colors lg:text-2xl">
             {game?.name}
           </h1>
         </div>
 
-        <div className="text-base xl:text-lg flex items-center justify-between border-t border-white/10 pt-3 font-medium text-gray-400">
+        <div className="flex items-center justify-between border-t border-white/10 pt-3 text-base font-medium text-gray-400 xl:text-lg">
           <span className="flex items-center">
             <span className="mr-1.5 font-semibold text-(--color-accent-primary)">
               {game?.rating_count}
