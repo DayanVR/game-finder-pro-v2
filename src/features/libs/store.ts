@@ -7,6 +7,7 @@ export type StoreGame = {
   UITitle: string;
   setUITitle: (title: string) => void;
   savedGames: SavedGame[];
+  setSavedGames: (games: SavedGame[]) => void;
 
   addGame: (game: IGDBGameListItem) => void;
   removeGame: (id: number) => void;
@@ -21,6 +22,7 @@ const useGameStore = create<StoreGame>((set) => ({
   UITitle: 'All Platforms',
   setUITitle: (title) => set({ UITitle: title }),
   savedGames: [],
+  setSavedGames: (games) => set({ savedGames: games }),
 
   addGame: (game) =>
     set((state) => {

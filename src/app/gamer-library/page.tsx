@@ -1,16 +1,60 @@
 'use client';
+
 import { TrashCan } from '@/features/shared/gamerLibrary/trashCan';
 import { NavigateBack } from '@/features/games/components/navigateBack';
 import useGameStore from '@/features/libs/store';
 import { useEffect } from 'react';
 import GameCard from '@/features/games/components/games/GameCard';
+import { supabase } from '@/features/libs/supabase';
+import { useUser } from '@clerk/nextjs';
+
+interface NormalizedGame {
+  id: number;
+  slug: string;
+  name: string;
+  cover: {
+    url: string;
+  };
+  rating: number;
+  rating_count: number;
+}
 
 export default function GamerLibraryPage() {
-  const { loadGames, clearGames, savedGames } = useGameStore();
+  const { user } = useUser();
+  const { clearGames, savedGames, setSavedGames } = useGameStore();
+
+  // useEffect(() => {
+  //   loadGames();
+  // }, [loadGames]);
 
   useEffect(() => {
-    loadGames();
-  }, [loadGames]);
+    const fetchGames = async () => {
+      if (!user) return;
+
+      const { data, error } = await supabase.from('saved_games').select('*').eq('user_id', user.id);
+
+      if (error) {
+        console.error(error);
+        return;
+      }
+      const normalizedGames: NormalizedGame[] = data.map((game) => ({
+        id: game.game_id,
+        slug: game.slug,
+        name: game.name,
+
+        cover: {
+          url: game.cover_url,
+        },
+
+        rating: game.rating,
+        rating_count: game.rating_count,
+      }));
+
+      setSavedGames(normalizedGames);
+    };
+
+    fetchGames();
+  }, [user]);
 
   return (
     <>
