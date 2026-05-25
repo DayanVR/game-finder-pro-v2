@@ -6,7 +6,7 @@ import { sidebarIcons } from '@/features/shared/sidebarIcons';
 import { normalizeImage } from '@/features/libs/normalizeImage';
 import { formattedDate } from '@/features/libs/functions';
 
-export default function GameCard({ game }: { game: IGDBGameListItem  }) {
+export default function GameCard({ game }: { game: IGDBGameListItem }) {
   const { Windows, PlayStation, Xbox, Android, IOS, Nintendo } = sidebarIcons;
   const platformIcons = useMemo(() => {
     if (!game.platforms) return [];
@@ -40,7 +40,7 @@ export default function GameCard({ game }: { game: IGDBGameListItem  }) {
         : 'bg-red-500/20 text-red-400';
 
   const formatDate = formattedDate(game?.first_release_date);
-  console.log(game.cover);
+
   return (
     <Link
       href={`/${game.slug}`}
