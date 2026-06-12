@@ -95,8 +95,3 @@ export type SavedGame = {
   rating: number;
   rating_count: number;
 };
-
-// export type SavedGame = Pick<
-//   IGDBGameListItem,
-//   'id' | 'slug' | 'name' | 'game_id' | 'cover' | 'rating' | 'rating_count' | 'platforms'
-// >;
