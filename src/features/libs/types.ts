@@ -4,7 +4,7 @@ export interface IGDBBase {
 }
 
 export interface IGDBImage {
-  id: number;
+  id?: number;
   url: string;
 }
 
@@ -91,9 +91,7 @@ export type SavedGame = {
   id: number;
   slug: string;
   name: string;
-  cover: {
-    url: string;
-  };
+  cover: IGDBImage;
   rating: number;
   rating_count: number;
 };
