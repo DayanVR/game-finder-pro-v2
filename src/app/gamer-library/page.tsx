@@ -7,25 +7,11 @@ import { useEffect } from 'react';
 import GameCard from '@/features/games/components/games/GameCard';
 import { supabase } from '@/features/libs/supabase';
 import { useUser } from '@clerk/nextjs';
-
-interface NormalizedGame {
-  id: number;
-  slug: string;
-  name: string;
-  cover: {
-    url: string;
-  };
-  rating: number;
-  rating_count: number;
-}
+import { SavedGame } from '@/features/libs/types';
 
 export default function GamerLibraryPage() {
   const { user } = useUser();
   const { clearGames, savedGames, setSavedGames } = useGameStore();
-
-  // useEffect(() => {
-  //   loadGames();
-  // }, [loadGames]);
 
   useEffect(() => {
     const fetchGames = async () => {
@@ -37,7 +23,7 @@ export default function GamerLibraryPage() {
         console.error(error);
         return;
       }
-      const normalizedGames: NormalizedGame[] = data.map((game) => ({
+      const normalizedGames: SavedGame[] = data.map((game) => ({
         id: game.game_id,
         slug: game.slug,
         name: game.name,
@@ -55,6 +41,7 @@ export default function GamerLibraryPage() {
 
     fetchGames();
   }, [user]);
+
 
   return (
     <>
