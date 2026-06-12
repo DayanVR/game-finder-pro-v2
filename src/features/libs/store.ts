@@ -27,9 +27,9 @@ const useGameStore = create<StoreGame>((set) => ({
   addGame: (game) =>
     set((state) => {
       const exists = state.savedGames.find((g) => g.id === game.id);
-      if (exists) return state;
+      if (exists) return {};
 
-      const updated = [...state.savedGames, game];
+      const updated = [...state.savedGames, game as SavedGame];
       localStorage.setItem('savedGames', JSON.stringify(updated));
       return { savedGames: updated };
     }),
