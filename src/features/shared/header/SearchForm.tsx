@@ -39,7 +39,7 @@ export default function SearchForm() {
       </div>
       <button
         type="submit"
-        className="cursor-pointer rounded-r-full border-y border-r border-(--color-accent-primary) bg-(--color-accent-primary) px-8 py-3 text-lg font-bold text-white transition-all hover:bg-(--color-accent-primary)/70 hover:shadow-[0_0_25px_#e7000b] max-md:hidden"
+        className="cursor-pointer rounded-r-full border-y border-r border-(--color-accent-primary) bg-(--color-accent-secondary) px-8 py-3 text-lg font-bold text-white transition-all hover:bg-(--color-accent-primary)  hover:shadow-[0_0_25px_#e7000b] max-md:hidden"
       >
         Search
       </button>
