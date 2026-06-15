@@ -29,7 +29,10 @@ export default function AddToLibraryButton({ game }: { game: IGDBGameListItem })
       onClick={async (e) => {
         e.preventDefault();
 
-        if (!user) return;
+        if (!user) {
+          alert('Please sign in to save games to your library.');
+          return;
+        }
 
         const normalizedGame = normalizeSavedGame(game);
 
@@ -54,7 +57,7 @@ export default function AddToLibraryButton({ game }: { game: IGDBGameListItem })
           toggleGame(normalizedGame);
         }
       }}
-      className="group flex cursor-pointer items-center gap-x-3 rounded-full border border-(--color-accent-primary)/50 bg-(--color-accent-primary)/20 px-6 py-3 backdrop-blur-md transition-all hover:scale-105"
+      className="group flex cursor-pointer items-center gap-x-3 rounded-full border border-(--color-accent-primary)/50 bg-(--color-accent-primary)/20 px-6 py-3 backdrop-blur-md transition-all hover:scale-105 hover:bg-(--color-accent-primary)/60 hover:shadow-[0_0_15px_#e7000b]"
     >
       <Plus className="size-4 fill-(--color-accent-primary) sm:size-6" />
 
