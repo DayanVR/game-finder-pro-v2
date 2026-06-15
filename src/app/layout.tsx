@@ -28,8 +28,8 @@ export default function RootLayout({
             <div className="flex min-h-screen flex-col">
               <div className="max-w-full flex-1 pt-4 lg:pt-8">
                 <IntroCall />
-                <Header />
                 <InfoCall />
+                <Header />
                 <main className="py-6 sm:px-6 xl:px-8 xl:py-10 2xl:px-10">{children}</main>
               </div>
               <div>
