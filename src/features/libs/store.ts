@@ -13,7 +13,6 @@ export type StoreGame = {
   removeGame: (id: number) => void;
   loadGames: () => void;
   toggleGame: (game: SavedGame) => void;
-  clearGames: () => void;
 };
 
 const useGameStore = create<StoreGame>((set) => ({
@@ -46,10 +45,6 @@ const useGameStore = create<StoreGame>((set) => ({
     if (data) {
       set({ savedGames: JSON.parse(data) });
     }
-  },
-  clearGames: () => {
-    localStorage.removeItem('savedGames');
-    set({ savedGames: [] });
   },
 
   toggleGame: (game) => {

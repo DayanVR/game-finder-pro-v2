@@ -11,7 +11,7 @@ import { SavedGame } from '@/features/libs/types';
 
 export default function GamerLibraryPage() {
   const { user } = useUser();
-  const { clearGames, savedGames, setSavedGames } = useGameStore();
+  const { savedGames, setSavedGames } = useGameStore();
 
   useEffect(() => {
     const fetchGames = async () => {
@@ -34,6 +34,7 @@ export default function GamerLibraryPage() {
 
         rating: game.rating,
         rating_count: game.rating_count,
+        platforms: game.platforms,
       }));
 
       setSavedGames(normalizedGames);
@@ -42,6 +43,21 @@ export default function GamerLibraryPage() {
     fetchGames();
   }, [user]);
 
+  const clearGames = async () => {
+    const confirmed = window.confirm(
+      'Are you sure you want to reset your library?'
+    );
+
+    if (!confirmed) return;
+    if (!user) return;
+
+    const { error } = await supabase.from('saved_games').delete().eq('user_id', user.id);
+    if (error) {
+      console.error(error);
+      return;
+    }
+    setSavedGames([]);
+  };
 
   return (
     <>

@@ -87,6 +87,7 @@ export interface IGDBGameListItem {
   genres?: IGDBNamedEntity[];
   platforms?: IGDBPlatform[];
 }
+
 export type SavedGame = {
   id: number;
   slug: string;
@@ -94,4 +95,5 @@ export type SavedGame = {
   cover: IGDBImage;
   rating: number;
   rating_count: number;
+  platforms: IGDBPlatform[];
 };
