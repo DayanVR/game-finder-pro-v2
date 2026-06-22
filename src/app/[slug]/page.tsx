@@ -1,6 +1,7 @@
 import { fetchGameDetails } from '@/features/games/hooks/fetchGamesData';
 import { NavigateBack } from '@/features/games/components/navigateBack';
 import Image from 'next/image';
+import { ViewTransition } from 'react';
 import { normalizeImage } from '@/features/libs/normalizeImage';
 import GameInfo from '@/features/games/components/games/GameInfo';
 import { IGDBGame, SavedGame } from '@/features/libs/types';
@@ -41,21 +42,22 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
         <NavigateBack />
         <AddToLibraryButton game={gameDetails as SavedGame} />
       </div>
-
       <section className="relative flex gap-8 max-md:flex-col">
         <div className="my-3 w-full justify-self-center sm:max-w-[300px] lg:my-8">
           {gameDetails && (
             <div className="group relative aspect-3/4 overflow-hidden rounded-2xl border border-black/50 shadow-2xl shadow-[#e7000b]/30 transition-transform duration-300 hover:scale-[1.02]">
-              <Image
-                src={
-                  normalizeImage(gameDetails.cover?.url.replace('t_thumb', 't_720p')) ??
-                  '/img-not-found.jpg'
-                }
-                fill={true}
-                alt={gameDetails.name ?? ''}
-                className="object-cover"
-                priority
-              />
+              <ViewTransition name={`game-${gameDetails.id}`}>
+                <Image
+                  src={
+                    normalizeImage(gameDetails.cover?.url.replace('t_thumb', 't_720p')) ??
+                    '/img-not-found.jpg'
+                  }
+                  fill={true}
+                  alt={gameDetails.name ?? ''}
+                  className="object-cover"
+                  priority
+                />
+              </ViewTransition>
               <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
             </div>
           )}
