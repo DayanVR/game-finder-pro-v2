@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import VideoGamesList from '@/features/games/components/ui/VideoGamesList';
 import FiltersUI from '@/features/games/components/ui/FiltersUI';
 import { handleDateChange } from '@/features/libs/functions';
+import Loading from '@/features/libs/loading';
 
 export default async function Home({
   searchParams,
@@ -41,7 +42,7 @@ export default async function Home({
         releasedGameDate={gameDate}
         platformId={platformID}
       />
-      <Suspense>
+      <Suspense fallback={<Loading />}>
         <VideoGamesList
           q={q}
           sortBy={sortBy}
