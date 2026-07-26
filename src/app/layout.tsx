@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+// @ts-expect-error: Allow side-effect CSS import without module declarations
 import './globals.css';
 import Header from '@/shared/header/Header';
 import SidePanel from '@/shared/SidePanel';
@@ -18,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="bg-(--color-bg-secondary)">
+    <html lang="en" className="bg-(--color-bg-secondary) ">
       <body suppressHydrationWarning className="flex justify-center">
         <ClerkProvider>
           <div className="flex max-w-[1536px]">

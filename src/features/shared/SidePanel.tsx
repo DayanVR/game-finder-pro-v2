@@ -39,7 +39,7 @@ export default function SidePanel() {
   const customTheme = createTheme({
     sidebar: {
       root: {
-        inner: 'dark:bg-transparent',
+        inner: 'bg-transparent',
       },
       collapse: {
         label: {
@@ -50,7 +50,7 @@ export default function SidePanel() {
         },
       },
       item: {
-        base: 'text-xl font-medium ',
+        base: 'text-xl font-medium',
         collapsed: {
           insideCollapse:
             'hover:text-(--color-accent-primary) hover:cursor-pointer transition-colors duration-150',
