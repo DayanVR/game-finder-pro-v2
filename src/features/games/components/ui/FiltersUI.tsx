@@ -1,6 +1,5 @@
 'use client';
 
-import { Suspense } from 'react';
 import useGameStore from '@/features/libs/store';
 import Selection from '../Selection';
 import { useEffect } from 'react';
