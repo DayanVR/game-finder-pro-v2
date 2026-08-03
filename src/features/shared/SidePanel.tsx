@@ -42,21 +42,23 @@ export default function SidePanel() {
         inner: 'bg-transparent',
       },
       collapse: {
+        button: 'hover:bg-(--color-accent-secondary)',
         label: {
-          base: 'text-2xl font-medium hover:cursor-pointer',
+          base: 'text-2xl text-white font-medium hover:cursor-pointer transition',
         },
         icon: {
-          base: 'size-8',
+          open: 'text-(--color-accent-primary)',
+          base: 'size-8 text-(--color-accent-primary)',
         },
       },
       item: {
-        base: 'text-xl font-medium',
+        base: 'text-xl hover:bg-(--color-accent-secondary) text-white font-medium',
         collapsed: {
           insideCollapse:
-            'hover:text-(--color-accent-primary) hover:cursor-pointer transition-colors duration-150',
+            'hover:text-(--color-accent-primary) hover:cursor-pointer transition-colors duration-150 ',
         },
         icon: {
-          base: 'size-8',
+          base: 'size-8 text-(--color-accent-primary)',
         },
       },
       itemGroup: {
@@ -85,7 +87,7 @@ export default function SidePanel() {
           <h1 className="flex items-center justify-center text-2xl font-bold text-white">
             <Gamepad className="mr-2 size-10 rounded-lg bg-(--color-accent-primary)/20 p-1.5 text-(--color-accent-primary)" />
             GameFinder
-            <span className="pl-1.5 text-3xl text-(--color-accent-primary)">PRO</span>
+            <span className="pl-1.5 text-3xl text-(--color-accent-secondary)">PRO</span>
           </h1>
         </SidebarItems>
 
