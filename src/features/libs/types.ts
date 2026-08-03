@@ -95,5 +95,5 @@ export type SavedGame = {
   cover: IGDBImage;
   rating: number;
   rating_count: number;
-  platforms: IGDBPlatform[];
+  platforms?: IGDBPlatform[];
 };
