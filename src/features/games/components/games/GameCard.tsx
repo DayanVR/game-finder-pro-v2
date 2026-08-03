@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { useMemo } from 'react';
+import { useMemo, ViewTransition } from 'react';
 import { IGDBGameListItem } from '@/features/libs/types';
 import { sidebarIcons } from '@/features/shared/sidebarIcons';
 import { normalizeImage } from '@/features/libs/normalizeImage';
@@ -47,16 +47,18 @@ export default function GameCard({ game }: { game: IGDBGameListItem }) {
       className="group relative mx-auto h-[420px] w-[280px] cursor-pointer overflow-hidden rounded-2xl border border-white/5 bg-(--color-bg-secondary) shadow-xl backdrop-blur-md transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_0_30px_#e7000b]"
     >
       <div className="relative h-60 w-full overflow-hidden">
-        <Image
-          src={
-            normalizeImage(game.cover?.url.replace('t_thumb', 't_cover_big')) ??
-            '/img-not-found.jpg'
-          }
-          className="aspect-square h-full w-full object-fill transition-transform duration-700 group-hover:scale-105"
-          alt={game.name}
-          width={100}
-          height={100}
-        />
+        <ViewTransition name={`game-${game.id}`}>
+          <Image
+            src={
+              normalizeImage(game.cover?.url.replace('t_thumb', 't_cover_big')) ??
+              '/img-not-found.jpg'
+            }
+            className="aspect-square h-full w-full object-fill transition-transform duration-700 group-hover:scale-105"
+            alt={game.name}
+            width={100}
+            height={100}
+          />
+        </ViewTransition>
 
         <div className="absolute inset-0 bg-linear-to-t from-(--color-bg-secondary) via-transparent to-transparent opacity-40" />
       </div>
@@ -83,12 +85,12 @@ export default function GameCard({ game }: { game: IGDBGameListItem }) {
             </span>
           </div>
 
-          <h1 className="group-hover:text-primary mt-3 line-clamp-2 text-xl lg:text-2xl text-pretty font-bold text-white transition-colors">
+          <h1 className="group-hover:text-primary mt-3 line-clamp-2 text-xl font-bold text-pretty text-white transition-colors lg:text-2xl">
             {game?.name}
           </h1>
         </div>
 
-        <div className="text-base xl:text-lg flex items-center justify-between border-t border-white/10 pt-3 font-medium text-gray-400">
+        <div className="flex items-center justify-between border-t border-white/10 pt-3 text-base font-medium text-gray-400 xl:text-lg">
           <span className="flex items-center">
             <span className="mr-1.5 font-semibold text-(--color-accent-primary)">
               {game?.rating_count}

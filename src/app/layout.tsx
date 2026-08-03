@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
+// @ts-expect-error: Allow side-effect CSS import without module declarations
 import './globals.css';
 import Header from '@/shared/header/Header';
 import SidePanel from '@/shared/SidePanel';
 import IntroCall from '@/features/shared/IntroCall';
 import InfoCall from '@/features/shared/InfoCards';
 import Footer from '@/features/shared/Footer';
-import { Suspense } from 'react';
+import { ClerkProvider } from '@clerk/nextjs';
 
 export const metadata: Metadata = {
   title: 'Game Finder Pro',
@@ -18,26 +19,26 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="bg-(--color-bg-secondary)">
+    <html lang="en" className="bg-(--color-bg-secondary) ">
       <body suppressHydrationWarning className="flex justify-center">
-        <div className="flex max-w-[1536px]">
-          <div className="sticky top-0 h-screen shrink-0 max-lg:hidden">
-            <Suspense>
+        <ClerkProvider>
+          <div className="flex max-w-[1536px]">
+            <div className="sticky top-0 h-screen shrink-0 max-lg:hidden">
               <SidePanel />
-            </Suspense>
-          </div>
-          <div className="flex min-h-screen flex-col">
-            <div className="max-w-full flex-1 pt-4 lg:pt-8">
-              <IntroCall />
-              <Header />
-              <InfoCall />
-              <main className="py-6 sm:px-6 xl:px-8 xl:py-10 2xl:px-10">{children}</main>
             </div>
-            <div>
-              <Footer />
+            <div className="flex min-h-screen flex-col">
+              <div className="max-w-full flex-1 pt-4 lg:pt-8">
+                <IntroCall />
+                <InfoCall />
+                <Header />
+                <main className="py-6 sm:px-6 xl:px-8 xl:py-10 2xl:px-10">{children}</main>
+              </div>
+              <div>
+                <Footer />
+              </div>
             </div>
           </div>
-        </div>
+        </ClerkProvider>
       </body>
     </html>
   );

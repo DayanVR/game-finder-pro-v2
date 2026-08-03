@@ -1,16 +1,63 @@
 'use client';
+
 import { TrashCan } from '@/features/shared/gamerLibrary/trashCan';
 import { NavigateBack } from '@/features/games/components/navigateBack';
 import useGameStore from '@/features/libs/store';
 import { useEffect } from 'react';
 import GameCard from '@/features/games/components/games/GameCard';
+import { supabase } from '@/features/libs/supabase';
+import { useUser } from '@clerk/nextjs';
+import { SavedGame } from '@/features/libs/types';
 
 export default function GamerLibraryPage() {
-  const { loadGames, clearGames, savedGames } = useGameStore();
+  const { user } = useUser();
+  const { savedGames, setSavedGames } = useGameStore();
 
   useEffect(() => {
-    loadGames();
-  }, [loadGames]);
+    const fetchGames = async () => {
+      if (!user) return;
+
+      const { data, error } = await supabase.from('saved_games').select('*').eq('user_id', user.id);
+
+      if (error) {
+        console.error(error);
+        return;
+      }
+      const normalizedGames: SavedGame[] = data.map((game) => ({
+        id: game.game_id,
+        slug: game.slug,
+        name: game.name,
+
+        cover: {
+          url: game.cover_url,
+        },
+
+        rating: game.rating,
+        rating_count: game.rating_count,
+        platforms: game.platforms,
+      }));
+
+      setSavedGames(normalizedGames);
+    };
+
+    fetchGames();
+  }, [user]);
+
+  const clearGames = async () => {
+    const confirmed = window.confirm(
+      'Are you sure you want to reset your library?'
+    );
+
+    if (!confirmed) return;
+    if (!user) return;
+
+    const { error } = await supabase.from('saved_games').delete().eq('user_id', user.id);
+    if (error) {
+      console.error(error);
+      return;
+    }
+    setSavedGames([]);
+  };
 
   return (
     <>

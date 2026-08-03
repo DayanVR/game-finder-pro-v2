@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import VideoGamesList from '@/features/games/components/ui/VideoGamesList';
 import FiltersUI from '@/features/games/components/ui/FiltersUI';
 import { handleDateChange } from '@/features/libs/functions';
+import Loading from '@/features/libs/loading';
 
 export default async function Home({
   searchParams,
@@ -34,8 +35,14 @@ export default async function Home({
 
   return (
     <section className="space-y-4 lg:space-y-8">
-      <FiltersUI q={q} topGames={topGames} releasedGameDate={gameDate} platformId={platformID} />
-      <Suspense>
+      <FiltersUI
+        q={q}
+        sortBy={sortBy}
+        topGames={topGames}
+        releasedGameDate={gameDate}
+        platformId={platformID}
+      />
+      <Suspense fallback={<Loading />}>
         <VideoGamesList
           q={q}
           sortBy={sortBy}

@@ -54,9 +54,7 @@ const FiltersUI = ({
       <h1 className="text-center text-2xl md:text-4xl lg:text-left xl:text-5xl 2xl:text-6xl">
         {UITitle}
       </h1>
-      <Suspense>
-        <Selection searchGame={q && q.length > 0 ? true : false} />
-      </Suspense>
+      <Selection searchGame={q && q.length > 0 ? true : false} />
     </div>
   );
 };

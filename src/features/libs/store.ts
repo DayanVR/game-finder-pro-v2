@@ -7,12 +7,12 @@ export type StoreGame = {
   UITitle: string;
   setUITitle: (title: string) => void;
   savedGames: SavedGame[];
+  setSavedGames: (games: SavedGame[]) => void;
 
   addGame: (game: IGDBGameListItem) => void;
   removeGame: (id: number) => void;
   loadGames: () => void;
   toggleGame: (game: SavedGame) => void;
-  clearGames: () => void;
 };
 
 const useGameStore = create<StoreGame>((set) => ({
@@ -21,13 +21,14 @@ const useGameStore = create<StoreGame>((set) => ({
   UITitle: 'All Platforms',
   setUITitle: (title) => set({ UITitle: title }),
   savedGames: [],
+  setSavedGames: (games) => set({ savedGames: games }),
 
   addGame: (game) =>
     set((state) => {
       const exists = state.savedGames.find((g) => g.id === game.id);
-      if (exists) return state;
+      if (exists) return {};
 
-      const updated = [...state.savedGames, game];
+      const updated = [...state.savedGames, game as SavedGame];
       localStorage.setItem('savedGames', JSON.stringify(updated));
       return { savedGames: updated };
     }),
@@ -44,10 +45,6 @@ const useGameStore = create<StoreGame>((set) => ({
     if (data) {
       set({ savedGames: JSON.parse(data) });
     }
-  },
-  clearGames: () => {
-    localStorage.removeItem('savedGames');
-    set({ savedGames: [] });
   },
 
   toggleGame: (game) => {
