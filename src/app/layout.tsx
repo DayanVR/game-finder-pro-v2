@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-// @ts-expect-error: Allow side-effect CSS import without module declarations
 import './globals.css';
 import Header from '@/shared/header/Header';
 import SidePanel from '@/shared/SidePanel';
