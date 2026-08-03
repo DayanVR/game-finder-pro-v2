@@ -13,6 +13,10 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const gameDetails = await fetchGameDetails(slug);
 
+  if (!gameDetails) {
+    return
+  }
+  
   const { Star, Calendar, Controller, People } = detailsIcons;
   const { game_modes, player_perspectives, genres, themes, rating, rating_count } =
     gameDetails as IGDBGame;
