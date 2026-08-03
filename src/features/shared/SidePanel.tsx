@@ -47,7 +47,7 @@ export default function SidePanel() {
           base: 'text-2xl text-white font-medium hover:cursor-pointer transition',
         },
         icon: {
-          open: 'text-(--color-accent-primary)',
+          open: { on: 'text-(--color-accent-primary)' },
           base: 'size-8 text-(--color-accent-primary)',
         },
       },
