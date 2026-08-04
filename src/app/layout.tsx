@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import './globals.css';
 import Header from '@/shared/header/Header';
 import SidePanel from '@/shared/SidePanel';
@@ -18,19 +19,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="bg-(--color-bg-secondary) ">
+    <html lang="en" className="bg-(--color-bg-secondary)">
       <body suppressHydrationWarning className="flex justify-center">
         <ClerkProvider>
           <div className="flex max-w-[1536px]">
             <div className="sticky top-0 h-screen shrink-0 max-lg:hidden">
-              <SidePanel />
+              <Suspense>
+                <SidePanel />
+              </Suspense>
             </div>
             <div className="flex min-h-screen flex-col">
               <div className="max-w-full flex-1 pt-4 lg:pt-8">
                 <IntroCall />
                 <InfoCall />
-                <Header />
-                <main className="py-6 sm:px-6 xl:px-8 xl:py-10 2xl:px-10">{children}</main>
+                <Suspense>
+                  <Header />
+                </Suspense>
+                <main className="py-6 sm:px-6 xl:px-8 xl:py-10 2xl:px-10">
+                  <Suspense>{children}</Suspense>
+                </main>
               </div>
               <div>
                 <Footer />
