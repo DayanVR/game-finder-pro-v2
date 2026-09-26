@@ -16,7 +16,6 @@ jobs:
   refresh-token:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
 
       - name: Get Twitch access token
         id: extract
@@ -78,7 +77,7 @@ jobs:
               \"target\": \"production\",
               \"gitSource\": {
                 \"type\": \"github\",
-                \"repoId\": \"${{ secrets.GIT_REPO_ID }}\",
+                \"repoId\": \"${{ secrets.SERVER_GIT_REPO_ID  }}\",
                 \"ref\": \"master\"
               }
             }"
@@ -94,7 +93,7 @@ jobs:
               \"target\": \"production\",
               \"gitSource\": {
                 \"type\": \"github\",
-                \"repoId\": \"${{ secrets.GIT_REPO_ID }}\",
+                \"repoId\": \"${{ secrets.CLIENT_GIT_REPO_ID }}\",
                 \"ref\": \"master\"
               }
             }"
