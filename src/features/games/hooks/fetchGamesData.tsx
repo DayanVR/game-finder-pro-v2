@@ -66,7 +66,7 @@ export const fetchGameList = async ({
         method: 'POST',
         headers: {
           'Client-ID': process.env.NEXT_PUBLIC_CLIENT_ID!,
-          Authorization: process.env.NEXT_PUBLIC_AUTH_TOKEN!,
+          Authorization: process.env.NEXT_AUTH_TOKEN!,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
@@ -83,7 +83,7 @@ export const fetchGameList = async ({
         method: 'POST',
         headers: {
           'Client-ID': process.env.NEXT_PUBLIC_CLIENT_ID!,
-          Authorization: process.env.NEXT_PUBLIC_AUTH_TOKEN!,
+          Authorization: process.env.NEXT_AUTH_TOKEN!,
           'Content-Type': 'text/plain',
         },
         body: `where ${whereWithSearch};`,
@@ -132,7 +132,7 @@ export const fetchGameDetails = async (slug: string) => {
       method: 'POST',
       headers: {
         'Client-ID': `${process.env.NEXT_PUBLIC_CLIENT_ID}`,
-        Authorization: `${process.env.NEXT_PUBLIC_AUTH_TOKEN}`,
+        Authorization: `${process.env.NEXT_AUTH_TOKEN}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
