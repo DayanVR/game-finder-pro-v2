@@ -39,7 +39,7 @@ export default function SidePanel() {
   const customTheme = createTheme({
     sidebar: {
       root: {
-        inner: 'bg-transparent',
+        inner: 'bg-transparent!',
       },
       collapse: {
         button: 'hover:bg-(--color-accent-secondary)',
