@@ -16,6 +16,7 @@ jobs:
   refresh-token:
     runs-on: ubuntu-latest
     steps:
+
       - name: Get Twitch access token
         id: extract
         env:
@@ -50,35 +51,21 @@ jobs:
               \"type\": \"encrypted\"
             }"
 
-      
-      - name: Delete client token
+      - name: Update client token
         run: |
-          ENV_ID=$(curl -s \
-            -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN_CLIENT }}" \
+          ENV_ID=$(curl -s -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN_CLIENT }}" \
             "https://api.vercel.com/v9/projects/${{ secrets.VERCEL_PROJECT_ID }}/env" | \
             jq -r '.envs[] | select(.key=="NEXT_AUTH_TOKEN") | .id')
 
-          echo "Deleting ENV_ID: $ENV_ID"
-
-          curl -X DELETE \
-            "https://api.vercel.com/v9/projects/${{ secrets.VERCEL_PROJECT_ID }}/env/${ENV_ID}" \
-            -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN_CLIENT }}"
-
-      - name: Create client token
-        run: |
-          curl -X POST \
-            "https://api.vercel.com/v10/projects/${{ secrets.VERCEL_PROJECT_ID }}/env" \
+          curl -X PATCH "https://api.vercel.com/v9/projects/${{ secrets.VERCEL_PROJECT_ID }}/env/$ENV_ID" \
             -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN_CLIENT }}" \
             -H "Content-Type: application/json" \
             -d "{
-              \"key\": \"NEXT_AUTH_TOKEN\",
               \"value\": \"Bearer ${{ steps.extract.outputs.token }}\",
-              \"type\": \"encrypted\",
-              \"target\": [\"production\", \"preview\", \"development\"]
+              \"target\": [\"production\", \"preview\", \"development\"],
+              \"type\": \"encrypted\"
             }"
 
-
-          
       - name: Redeploy SERVER
         run: |
           curl -X POST "https://api.vercel.com/v13/deployments" \
