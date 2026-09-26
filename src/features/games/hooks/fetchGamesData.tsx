@@ -65,7 +65,7 @@ export const fetchGameList = async ({
       fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/games`, {
         method: 'POST',
         headers: {
-          'Client-ID': process.env.NEXT_PUBLIC_CLIENT_ID!,
+          'Client-ID': process.env.NEXT_CLIENT_ID!,
           Authorization: process.env.NEXT_AUTH_TOKEN!,
           'Content-Type': 'application/json',
         },
@@ -82,7 +82,7 @@ export const fetchGameList = async ({
       fetch('https://api.igdb.com/v4/games/count', {
         method: 'POST',
         headers: {
-          'Client-ID': process.env.NEXT_PUBLIC_CLIENT_ID!,
+          'Client-ID': process.env.NEXT_CLIENT_ID!,
           Authorization: process.env.NEXT_AUTH_TOKEN!,
           'Content-Type': 'text/plain',
         },
@@ -131,7 +131,7 @@ export const fetchGameDetails = async (slug: string) => {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/details`, {
       method: 'POST',
       headers: {
-        'Client-ID': `${process.env.NEXT_PUBLIC_CLIENT_ID}`,
+        'Client-ID': `${process.env.NEXT_CLIENT_ID}`,
         Authorization: `${process.env.NEXT_AUTH_TOKEN}`,
         'Content-Type': 'application/json',
       },
