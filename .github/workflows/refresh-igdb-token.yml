@@ -39,12 +39,12 @@ jobs:
 
       - name: Update server token
         run: |
-          ENV_ID=$(curl -s -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN }}" \
+          ENV_ID=$(curl -s -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN_SERVER }}" \
             "https://api.vercel.com/v9/projects/${{ secrets.SERVER_PROJECT_ID }}/env" | \
             jq -r '.envs[] | select(.key=="AUTHORIZATION") | .id')
 
           curl -X PATCH "https://api.vercel.com/v9/projects/${{ secrets.SERVER_PROJECT_ID }}/env/$ENV_ID" \
-            -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN }}" \
+            -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN_SERVER }}" \
             -H "Content-Type: application/json" \
             -d "{
               \"value\": \"Bearer ${{ steps.extract.outputs.token }}\",
@@ -54,12 +54,12 @@ jobs:
 
       - name: Update client token
         run: |
-          ENV_ID=$(curl -s -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN }}" \
+          ENV_ID=$(curl -s -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN_CLIENT }}" \
             "https://api.vercel.com/v9/projects/${{ secrets.VERCEL_PROJECT_ID }}/env" | \
             jq -r '.envs[] | select(.key=="REACT_APP_AUTH_TOKEN") | .id')
 
           curl -X PATCH "https://api.vercel.com/v9/projects/${{ secrets.VERCEL_PROJECT_ID }}/env/$ENV_ID" \
-            -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN }}" \
+            -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN_CLIENT }}" \
             -H "Content-Type: application/json" \
             -d "{
               \"value\": \"Bearer ${{ steps.extract.outputs.token }}\",
@@ -70,7 +70,7 @@ jobs:
       - name: Redeploy SERVER
         run: |
           curl -X POST "https://api.vercel.com/v13/deployments" \
-            -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN }}" \
+            -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN_SERVER }}" \
             -H "Content-Type: application/json" \
             -d "{
               \"name\": \"${{ secrets.SERVER_PROJECT_NAME }}\",
@@ -86,7 +86,7 @@ jobs:
       - name: Redeploy CLIENT
         run: |
           curl -X POST "https://api.vercel.com/v13/deployments" \
-            -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN }}" \
+            -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN_CLIENT }}" \
             -H "Content-Type: application/json" \
             -d "{
               \"name\": \"${{ secrets.CLIENT_PROJECT_NAME }}\",
