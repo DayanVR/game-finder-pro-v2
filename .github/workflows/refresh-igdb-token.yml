@@ -57,6 +57,8 @@ jobs:
             "https://api.vercel.com/v9/projects/${{ secrets.VERCEL_PROJECT_ID }}/env" | \
             jq -r '.envs[] | select(.key=="NEXT_AUTH_TOKEN") | .id')
 
+          echo "ENV_ID found: $ENV_ID"
+
           curl -X DELETE \
             "https://api.vercel.com/v9/projects/${{ secrets.VERCEL_PROJECT_ID }}/env/$ENV_ID" \
             -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN_CLIENT }}"
@@ -70,8 +72,8 @@ jobs:
               \"value\": \"Bearer ${{ steps.extract.outputs.token }}\",
               \"type\": \"encrypted\",
               \"target\": [\"production\", \"preview\", \"development\"]
-            }"
-
+          }"
+          
       - name: Redeploy SERVER
         run: |
           curl -X POST "https://api.vercel.com/v13/deployments" \
