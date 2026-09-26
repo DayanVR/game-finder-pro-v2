@@ -1,0 +1,100 @@
+name: Refresh IGDB Token
+
+on:
+  schedule:
+    - cron: '0 0 1 */2 *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: refresh-igdb-token
+  cancel-in-progress: false
+
+jobs:
+  refresh-token:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Get Twitch access token
+        id: extract
+        env:
+          TWITCH_CLIENT_ID: ${{ secrets.TWITCH_CLIENT_ID }}
+          TWITCH_CLIENT_SECRET: ${{ secrets.TWITCH_CLIENT_SECRET }}
+        run: |
+          set -euo pipefail
+
+          response=$(curl --fail-with-body --silent --show-error \
+            --request POST "https://id.twitch.tv/oauth2/token" \
+            --data-urlencode "client_id=${TWITCH_CLIENT_ID}" \
+            --data-urlencode "client_secret=${TWITCH_CLIENT_SECRET}" \
+            --data-urlencode "grant_type=client_credentials")
+
+          token=$(jq -er '.access_token | select(type == "string" and length > 0)' <<< "$response")
+
+          echo "::add-mask::$token"
+          echo "token=$token" >> "$GITHUB_OUTPUT"
+
+      - name: Update server token
+        run: |
+          ENV_ID=$(curl -s -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN }}" \
+            "https://api.vercel.com/v9/projects/${{ secrets.SERVER_PROJECT_ID }}/env" | \
+            jq -r '.envs[] | select(.key=="AUTHORIZATION") | .id')
+
+          curl -X PATCH "https://api.vercel.com/v9/projects/${{ secrets.SERVER_PROJECT_ID }}/env/$ENV_ID" \
+            -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d "{
+              \"value\": \"Bearer ${{ steps.extract.outputs.token }}\",
+              \"target\": [\"production\", \"preview\", \"development\"],
+              \"type\": \"encrypted\"
+            }"
+
+      - name: Update client token
+        run: |
+          ENV_ID=$(curl -s -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN }}" \
+            "https://api.vercel.com/v9/projects/${{ secrets.VERCEL_PROJECT_ID }}/env" | \
+            jq -r '.envs[] | select(.key=="REACT_APP_AUTH_TOKEN") | .id')
+
+          curl -X PATCH "https://api.vercel.com/v9/projects/${{ secrets.VERCEL_PROJECT_ID }}/env/$ENV_ID" \
+            -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d "{
+              \"value\": \"Bearer ${{ steps.extract.outputs.token }}\",
+              \"target\": [\"production\", \"preview\", \"development\"],
+              \"type\": \"encrypted\"
+            }"
+
+      - name: Redeploy SERVER
+        run: |
+          curl -X POST "https://api.vercel.com/v13/deployments" \
+            -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d "{
+              \"name\": \"${{ secrets.SERVER_PROJECT_NAME }}\",
+              \"project\": \"${{ secrets.SERVER_PROJECT_ID }}\",
+              \"target\": \"production\",
+              \"gitSource\": {
+                \"type\": \"github\",
+                \"repoId\": \"${{ secrets.GIT_REPO_ID }}\",
+                \"ref\": \"master\"
+              }
+            }"
+
+      - name: Redeploy CLIENT
+        run: |
+          curl -X POST "https://api.vercel.com/v13/deployments" \
+            -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d "{
+              \"name\": \"${{ secrets.CLIENT_PROJECT_NAME }}\",
+              \"project\": \"${{ secrets.VERCEL_PROJECT_ID }}\",
+              \"target\": \"production\",
+              \"gitSource\": {
+                \"type\": \"github\",
+                \"repoId\": \"${{ secrets.GIT_REPO_ID }}\",
+                \"ref\": \"master\"
+              }
+            }"
