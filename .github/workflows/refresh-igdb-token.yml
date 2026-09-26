@@ -56,6 +56,8 @@ jobs:
             "https://api.vercel.com/v9/projects/${{ secrets.VERCEL_PROJECT_ID }}/env" | \
             jq -r '.envs[] | select(.key=="NEXT_AUTH_TOKEN") | .id')
 
+          VALUE=$(printf 'Bearer %s' '${{ steps.extract.outputs.token }}' | jq -Rs .)
+
           curl -X PATCH "https://api.vercel.com/v9/projects/${{ secrets.VERCEL_PROJECT_ID }}/env/$ENV_ID" \
             -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN_CLIENT }}" \
             -H "Content-Type: application/json" \
